@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final path = await getApplicationCacheDirectory();
   Hive.init(path.path);
-  repoDi();
+  initDependency();
   setupAuthLocator();
   runApp(const MyApp());
 }
@@ -29,9 +29,6 @@ class _MyAppState extends State<MyApp> {
   
   @override
   void initState() {
-    // debugPrint('Firebase Api Key Android: $firebaseApiKeyAndroid');
-    // debugPrint('Firebase Api Key iOS: $firebaseApiKeyIos');
-    // debugPrint('Firebase App ID Android: $firebaseAppIdAndroid');
     super.initState();
     
     AppManager().initialize();
@@ -52,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       },
       home: Scaffold(
         body: Center(
-          child: Text("Scroll Challenge", style: Theme.of(context).textTheme.headlineLarge,),
+          child: Text("Tag App", style: Theme.of(context).textTheme.headlineLarge,),
         )
       ),
       

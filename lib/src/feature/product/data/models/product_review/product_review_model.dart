@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import '../../../domain/entities/product_review.dart';
 
-part 'product_review_model.mappable.dart';
+part 'product_review_model.mapper.dart';
 
 @MappableClass()
 class ProductReviewModel with ProductReviewModelMappable {

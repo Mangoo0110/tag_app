@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import '../../../domain/entities/product_dimensions.dart';
 
-part 'product_dimensions_model.mappable.dart';
+part 'product_dimensions_model.mapper.dart';
 
 @MappableClass()
 class ProductDimensionsModel with ProductDimensionsModelMappable {
