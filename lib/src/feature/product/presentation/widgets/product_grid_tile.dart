@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/product.dart';
 import '../../../../core/shared/widget/image_placeholder_widget.dart';
+import '../views/product_detail_view.dart';
 
 class ProductGridTile extends StatelessWidget {
   const ProductGridTile({
@@ -41,117 +42,127 @@ class ProductGridTile extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(width * 0.08),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Image container
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      hPad,
-                      vPadTop,
-                      hPad,
-                      height * 0.02,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(width * 0.08),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => ProductDetailView(product: product),
                     ),
-                    child: Center(
-                      child: Container(
-                        height: imageHeight,
-                        width: double.infinity,
-                        decoration: BoxDecoration(),
-                        child: ProductImage(imageUrl: product.imageUrl),
+                  );
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Image container
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        hPad,
+                        vPadTop,
+                        hPad,
+                        height * 0.02,
+                      ),
+                      child: Center(
+                        child: Container(
+                          height: imageHeight,
+                          width: double.infinity,
+                          decoration: BoxDecoration(),
+                          child: ProductImage(imageUrl: product.imageUrl),
+                        ),
                       ),
                     ),
-                  ),
-                  // Details container
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      hPad,
-                      height * 0.01,
-                      hPad,
-                      vPadBottom,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FittedBox(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              if (priceInfo.hasMultipleVariants)
-                                Text(
-                                  'From ',
-                                  style: TextStyle(
-                                    fontSize: labelFont,
-                                    color: const Color(0xFF6B6B6B),
-                                  ),
-                                ),
-                              Text(
-                                moneyFormat(priceInfo.minPrice),
-                                style: TextStyle(
-                                  fontSize: priceFont,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              if (priceInfo.originalPrice != null) ...[
-                                SizedBox(width: width * 0.03),
-                                Text(
-                                  moneyFormat(priceInfo.originalPrice!),
-                                  style: TextStyle(
-                                    fontSize: labelFont,
-                                    color: const Color(0xFF9A9A9A),
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                              ],
-                            ],
-                          ),
-                        ),
-                        Text(
-                          product.name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: nameFont,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(height: height * 0.03),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: width * 0.4,
-                              child: Text(
-                                unitLabel,
-                                maxLines: 2,
-                                style: TextStyle(
-                                  fontSize: smallFont,
-                                  color: const Color(0xFF8A8A8A),
-                                ),
-                              ),
-                            ),
-                            Row(
+                    // Details container
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        hPad,
+                        height * 0.01,
+                        hPad,
+                        vPadBottom,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FittedBox(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(
-                                  Icons.timer_outlined,
-                                  size: smallFont * 1.1,
-                                  color: const Color(0xFFB0B0B0),
-                                ),
-                                SizedBox(width: width * 0.02),
+                                if (priceInfo.hasMultipleVariants)
+                                  Text(
+                                    'From ',
+                                    style: TextStyle(
+                                      fontSize: labelFont,
+                                      color: const Color(0xFF6B6B6B),
+                                    ),
+                                  ),
                                 Text(
-                                  deliveryLabel,
+                                  moneyFormat(priceInfo.minPrice),
+                                  style: TextStyle(
+                                    fontSize: priceFont,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                if (priceInfo.originalPrice != null) ...[
+                                  SizedBox(width: width * 0.03),
+                                  Text(
+                                    moneyFormat(priceInfo.originalPrice!),
+                                    style: TextStyle(
+                                      fontSize: labelFont,
+                                      color: const Color(0xFF9A9A9A),
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                          Text(
+                            product.name,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: nameFont,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: height * 0.03),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: width * 0.4,
+                                child: Text(
+                                  unitLabel,
+                                  maxLines: 2,
                                   style: TextStyle(
                                     fontSize: smallFont,
                                     color: const Color(0xFF8A8A8A),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.timer_outlined,
+                                    size: smallFont * 1.1,
+                                    color: const Color(0xFFB0B0B0),
+                                  ),
+                                  SizedBox(width: width * 0.02),
+                                  Text(
+                                    deliveryLabel,
+                                    style: TextStyle(
+                                      fontSize: smallFont,
+                                      color: const Color(0xFF8A8A8A),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             // Overlay builder (e.g. for cart quantity box)
