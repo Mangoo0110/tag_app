@@ -6,6 +6,8 @@ class AuthUser {
     required this.firstName,
     required this.lastName,
     required this.phone,
+    required this.imageUrl,
+
   });
 
   final int id;
@@ -14,6 +16,7 @@ class AuthUser {
   final String firstName;
   final String lastName;
   final String phone;
+  final String? imageUrl;
 
   String get fullName => '$firstName $lastName'.trim();
 }

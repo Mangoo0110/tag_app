@@ -9,7 +9,6 @@ import 'package:tag_app/src/feature/category/domain/usecases/get_category_by_id_
 import 'package:tag_app/src/feature/category/domain/usecases/search_categories_use_case.dart';
 import 'package:tag_app/src/feature/category/presentation/controllers/category_controller.dart';
 import 'package:tag_app/src/feature/product/data/datasources/product_remote_data_source.dart';
-import 'package:tag_app/src/feature/product/data/repositories/mock_product_repository.dart';
 import 'package:tag_app/src/feature/product/data/repositories/product_repository_impl.dart';
 import 'package:tag_app/src/feature/product/domain/repositories/product_repository.dart';
 import 'package:tag_app/src/feature/product/domain/usecases/get_product_by_id_use_case.dart';
@@ -56,7 +55,6 @@ void initDependency() async {
 
   serviceLocator.registerLazySingleton<ProductRepository>(
     () => ProductRepositoryImpl(
-      fallbackRepo: MockProductRepository(),
       remote: serviceLocator<ProductRemoteDataSource>(),
     ),
   );

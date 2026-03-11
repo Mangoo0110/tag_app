@@ -92,6 +92,13 @@ class _AccountViewState extends State<AccountView> {
                 subtitle: const Text('Current user'),
               ),
               const Divider(),
+              // network image
+              if(user.imageUrl != null)Image.network(
+                user.imageUrl!,
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
               ListTile(
                 title: const Text('Username'),
                 subtitle: Text(user.username),

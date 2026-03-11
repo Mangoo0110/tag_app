@@ -11,7 +11,7 @@ class AuthUserModel extends AuthUser with AuthUserModelMappable {
     required super.username,
     required super.firstName,
     required super.lastName,
-    required super.phone,
+    required super.phone, required super.imageUrl,
   });
 
   factory AuthUserModel.fromEntity(AuthUser entity) {
@@ -22,6 +22,7 @@ class AuthUserModel extends AuthUser with AuthUserModelMappable {
       firstName: entity.firstName,
       lastName: entity.lastName,
       phone: entity.phone,
+      imageUrl: entity.imageUrl
     );
   }
 
@@ -40,6 +41,7 @@ class AuthUserModel extends AuthUser with AuthUserModelMappable {
           (json['lastName'] as String?) ??
           '',
       phone: (json['phone'] as String?) ?? '',
+      imageUrl: json['image'],
     );
   }
 
@@ -51,6 +53,7 @@ class AuthUserModel extends AuthUser with AuthUserModelMappable {
       'username': username,
       'phone': phone,
       'name': <String, dynamic>{'firstname': firstName, 'lastname': lastName},
+      'image': imageUrl
     };
   }
 }

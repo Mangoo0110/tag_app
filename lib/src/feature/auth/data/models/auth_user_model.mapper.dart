@@ -43,6 +43,11 @@ class AuthUserModelMapper extends ClassMapperBase<AuthUserModel> {
   );
   static String _$phone(AuthUserModel v) => v.phone;
   static const Field<AuthUserModel, String> _f$phone = Field('phone', _$phone);
+  static String? _$imageUrl(AuthUserModel v) => v.imageUrl;
+  static const Field<AuthUserModel, String> _f$imageUrl = Field(
+    'imageUrl',
+    _$imageUrl,
+  );
 
   @override
   final MappableFields<AuthUserModel> fields = const {
@@ -52,6 +57,7 @@ class AuthUserModelMapper extends ClassMapperBase<AuthUserModel> {
     #firstName: _f$firstName,
     #lastName: _f$lastName,
     #phone: _f$phone,
+    #imageUrl: _f$imageUrl,
   };
 
   static AuthUserModel _instantiate(DecodingData data) {
@@ -62,6 +68,7 @@ class AuthUserModelMapper extends ClassMapperBase<AuthUserModel> {
       firstName: data.dec(_f$firstName),
       lastName: data.dec(_f$lastName),
       phone: data.dec(_f$phone),
+      imageUrl: data.dec(_f$imageUrl),
     );
   }
 
@@ -134,6 +141,7 @@ abstract class AuthUserModelCopyWith<$R, $In extends AuthUserModel, $Out>
     String? firstName,
     String? lastName,
     String? phone,
+    String? imageUrl,
   });
   AuthUserModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -154,6 +162,7 @@ class _AuthUserModelCopyWithImpl<$R, $Out>
     String? firstName,
     String? lastName,
     String? phone,
+    Object? imageUrl = $none,
   }) => $apply(
     FieldCopyWithData({
       if (id != null) #id: id,
@@ -162,6 +171,7 @@ class _AuthUserModelCopyWithImpl<$R, $Out>
       if (firstName != null) #firstName: firstName,
       if (lastName != null) #lastName: lastName,
       if (phone != null) #phone: phone,
+      if (imageUrl != $none) #imageUrl: imageUrl,
     }),
   );
   @override
@@ -172,6 +182,7 @@ class _AuthUserModelCopyWithImpl<$R, $Out>
     firstName: data.get(#firstName, or: $value.firstName),
     lastName: data.get(#lastName, or: $value.lastName),
     phone: data.get(#phone, or: $value.phone),
+    imageUrl: data.get(#imageUrl, or: $value.imageUrl),
   );
 
   @override
