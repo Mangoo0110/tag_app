@@ -1,0 +1,10 @@
+export 'domain/entities/category.dart';
+export 'domain/repositories/category_repository.dart';
+export 'domain/usecases/get_categories_use_case.dart';
+export 'domain/usecases/get_category_by_id_use_case.dart';
+export 'domain/usecases/search_categories_use_case.dart';
+export 'data/models/category_model.dart';
+export 'data/repositories/category_repository_impl.dart';
+export 'data/repositories/mock_category_repository.dart';
+export 'presentation/controllers/category_controller.dart';
+export 'presentation/views/category_view.dart';
