@@ -8,16 +8,12 @@ import '../../domain/entities/product_page.dart';
 import '../../domain/entities/product_query_params.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../datasources/product_remote_data_source.dart';
-import 'mock_product_repository.dart';
 
 class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
   ProductRepositoryImpl({
-    ProductRepository? fallbackRepo,
     required ProductRemoteDataSource remote,
-  }) : _fallbackRepo = fallbackRepo ?? MockProductRepository(),
-       _remote = remote;
+  }) : _remote = remote;
 
-  final ProductRepository _fallbackRepo;
   final ProductRemoteDataSource _remote;
   final Debugger _debugger = ServiceDebugger();
 
@@ -37,10 +33,7 @@ class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
         );
       },
     );
-    if (remote is SuccessResponse<ProductPage>) {
-      return remote;
-    }
-    return _fallbackRepo.getProducts(params);
+    return remote;
   }
 
   @override
@@ -51,10 +44,7 @@ class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
         return SuccessResponse<Product?>(data: product);
       },
     );
-    if (remote is SuccessResponse<Product?>) {
-      return remote;
-    }
-    return _fallbackRepo.getProductById(id);
+    return remote;
   }
 
   @override
@@ -76,10 +66,7 @@ class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
         return SuccessResponse<List<ProductVariant>>(data: variants);
       },
     );
-    if (remote is SuccessResponse<List<ProductVariant>>) {
-      return remote;
-    }
-    return _fallbackRepo.getVariantsByProductId(productId);
+    return remote;
   }
 
   List<Product> _filterProducts(
