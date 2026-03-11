@@ -3,7 +3,6 @@ import '../../../domain/entities/product.dart';
 import '../product_dimensions/product_dimensions_model.dart';
 import '../product_meta/product_meta_model.dart';
 import '../product_review/product_review_model.dart';
-
 part 'product_model.mapper.dart';
 
 @MappableClass()
