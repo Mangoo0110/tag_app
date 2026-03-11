@@ -62,6 +62,25 @@ class _PaginatedGridViewState<K, T> extends State<PaginatedGridView<K, T>> {
       builder: (context, _) {
         final state = widget.pagination.state.value;
 
+        if (state == PaginationLoadState.error &&
+            widget.pagination.totalItemsCount == 0) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.pagination.errorMessage ?? 'Failed to load items.',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              TextButton.icon(
+                onPressed: widget.pagination.refresh,
+                icon: const Icon(Icons.refresh),
+                label: const Text('Retry'),
+              ),
+            ],
+          ).animate().fadeIn(duration: 300.ms);
+        }
+
         if (state == PaginationLoadState.nopages) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -173,6 +192,25 @@ class _PaginatedGridViewState<K, T> extends State<PaginatedGridView<K, T>> {
                                     ),
                                   ),
                                 ),
+                              );
+                            }
+                            if (value == PaginationLoadState.error) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    widget.pagination.errorMessage ??
+                                        'Failed to load more items.',
+                                    style: const TextStyle(color: Colors.grey),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 6),
+                                  TextButton.icon(
+                                    onPressed: widget.pagination.loadNextPage,
+                                    icon: const Icon(Icons.refresh),
+                                    label: const Text('Retry loading'),
+                                  ),
+                                ],
                               );
                             }
                             return Container();
