@@ -35,7 +35,6 @@ class AppTheme {
           foregroundColor: AppColors.light().primaryColor,
         ),
       ),
-
       primaryColorLight: AppColors.light().primaryColor,
       primaryColorDark: AppColors.light().primaryColor,
       splashColor: AppColors.light().splashColor,
@@ -69,6 +68,9 @@ class AppTheme {
         backgroundColor: AppColors.light().backgroundColor,
         cardColor: AppColors.light().backgroundColor,
         brightness: Brightness.light,
+      ).copyWith(
+        outline: AppColors.light().borderColor,
+        outlineVariant: AppColors.light().dividerColor,
       ),
       scaffoldBackgroundColor: AppColors.light().backgroundColor,
       textTheme: DTextTheme.lightTextTheme,
@@ -138,6 +140,9 @@ class AppTheme {
         backgroundColor: AppColors.dark().backgroundColor,
         cardColor: AppColors.dark().backgroundColor,
         brightness: Brightness.dark,
+      ).copyWith(
+        outline: AppColors.dark().borderColor,
+        outlineVariant: AppColors.dark().dividerColor,
       ),
       scaffoldBackgroundColor: AppColors.dark().backgroundColor,
       textTheme: DTextTheme.darkTextTheme,

@@ -1,16 +1,33 @@
 # tag_app
 
-A new Flutter project.
+Clean-architecture Flutter app using DummyJSON as the backend.
 
-## Getting Started
+## Setup (brief)
 
-This project is a starting point for a Flutter application.
+1. Install Flutter (stable) and ensure `flutter doctor` is clean.
+2. Fetch dependencies:
+   - `flutter pub get`
+3. Generate mappers (dart_mappable):
+   - `flutter pub run build_runner build --delete-conflicting-outputs`
+4. Run the app:
+   - `flutter run`
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Auth, Category, Product, Post (clean architecture: `domain/`, `data/`, `presentation/`)
+- Pagination for product/post lists
+- Remote-only data for posts, DummyJSON for other resources
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Key packages used
+
+- `app_pigeon`: HTTP client wrapper
+- `dart_mappable`: model mapping (`*.mapper.dart`)
+- `pagination_pkg`: pagination engine + widgets
+- `async_handler`: async error handling & response wrapper
+- `get_it`: dependency injection
+- `hive_ce`: local storage (if/when used)
+- `flutter_animate`: subtle UI animations
+
+## API base
+
+- DummyJSON: `https://dummyjson.com`

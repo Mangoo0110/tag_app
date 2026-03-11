@@ -19,12 +19,16 @@ base class ApiEndpoints {
   static const String getProducts = '$baseUrl/products';
   static String singleProduct(String productId) => '$baseUrl/products/$productId';
 
+  // ---------------------- POSTS -----------------------------
+  static const String posts = '$baseUrl/posts';
+  static String postComments(int postId) => '$baseUrl/posts/$postId/comments';
+
 }
 
 class _RemoteServer {
-  static const String socketUrl = 'https://fakestoreapi.com';
+  static const String socketUrl = 'https://dummyjson.com';
 
-  static const String baseUrl = 'https://fakestoreapi.com';
+  static const String baseUrl = 'https://dummyjson.com';
 }
 
 class _LocalHostWifi {

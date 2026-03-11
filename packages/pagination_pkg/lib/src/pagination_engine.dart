@@ -44,8 +44,10 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
 
   final ValueNotifier<PaginationLoadState> _state = ValueNotifier(PaginationLoadState.idle);
   final ValueNotifier<String> searchText = ValueNotifier('');
+  final ValueNotifier<String?> _errorMessage = ValueNotifier(null);
 
   ValueNotifier<PaginationLoadState> get state => _state;
+  String? get errorMessage => _errorMessage.value;
 
   /// Default is set to 10 by the constructor.
   /// This is the number of items to be fetched per page. You should maintain this number. If you return more they will be added to the next page
@@ -70,17 +72,15 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
   Future<PaginationPage<ItemUniqueKey, ItemData>?> requestData({
     required OnDemandPage<ItemData> onDemandPage,
   }) async{
-
     PaginationPage<ItemUniqueKey, ItemData>? page;
-    // await debouncer.run(() async {
-      
-    // });
+
     final res = await onDemandPageCall( 
         onDemandPage: onDemandPage,
       );
     if(res is PaginationError) {
       debugPrint("Error fetching page: ${res.page} with message: ${(res as PaginationError).message}");
       setError(error: res as PaginationError);
+      return null;
     } else if(res is PaginationPage<ItemUniqueKey, ItemData>) {
       debugPrint("Fetched page: ${res.page} with items: ${res.items}");
       page = res;
@@ -91,7 +91,7 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
 
   void search(String text) async{
     debouncer.run(() async {
-      if( state.value == PaginationLoadState.refreshing) {
+      if(state.value == PaginationLoadState.refreshing) {
         return;
       }
       searchText.value = text;
@@ -104,6 +104,9 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
           cursor: null,
         ),
       );
+      if (state.value == PaginationLoadState.error) {
+        return;
+      }
       debugPrint("Search result for text: $text is page: ${page?.page} with items count: ${page?.items.length}");
       if(page != null) {
         debugPrint("Adding items: ${page.items.length}");
@@ -112,6 +115,7 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
       } else {
         debugPrint("No items to add.. setting state to nopages");
         state.value = PaginationLoadState.nopages;
+        
       }
       notifyListeners();
     });
@@ -125,6 +129,7 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
   void setRefresh() {
     _mem.clear();
     state.value = PaginationLoadState.refreshing;
+    _errorMessage.value = null;
     notifyListeners();
   }
 
@@ -132,17 +137,21 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
   /// #### NOTE: This does not trigger [notifyListeners]
   setError({PaginationError? error}) {
     state.value = PaginationLoadState.error;
+    _errorMessage.value = error?.message;
+    notifyListeners();
   }
 
   /// Sets the state to [PaginationLoadState.loading]
   /// #### NOTE: This does not trigger [notifyListeners]
   void setLoading() {
     state.value = PaginationLoadState.loading;
+    _errorMessage.value = null;
   }
 
   /// Triggers [notifyListeners]
   void setNoPages() {
     state.value = PaginationLoadState.nopages;
+    _errorMessage.value = null;
     notifyListeners();
   }
   
@@ -170,6 +179,9 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
         ),
       );
 
+      if (state.value == PaginationLoadState.error) {
+        return;
+      }
       _mem.addNextPage(res?.items ?? <ItemUniqueKey, ItemData>{});
       if(res?.items.isEmpty ?? false) {
         state.value = PaginationLoadState.allLoaded;
@@ -196,6 +208,9 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
           cursor: _mem.first,
         ),
       );
+      if (state.value == PaginationLoadState.error) {
+        return;
+      }
       _mem.addFrontPage(res?.items ?? <ItemUniqueKey, ItemData>{});
       if(res?.items.isEmpty ?? false) {
         state.value = PaginationLoadState.allLoaded;
@@ -219,5 +234,6 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
     _mem.clear();
     _state.dispose();
     searchText.dispose();
+    _errorMessage.dispose();
   }
 }
