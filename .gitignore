@@ -48,4 +48,5 @@ app.*.map.json
 /lib/src/feature/category
 /lib/src/feature/cart
 /lib/src/feature/auth
-/lib/src/di
+/lib/src/feature/product
+

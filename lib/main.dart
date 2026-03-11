@@ -4,6 +4,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:tag_app/src/app/app_manager.dart';
 import 'package:tag_app/src/app/routing/app_router.dart';
 import 'package:tag_app/src/di/auth_di.dart';
+import 'package:tag_app/src/feature/post/post_di.dart';
+import 'package:tag_app/src/feature/post/presentation/views/post_view.dart';
 import 'src/di/repo_di.dart';
 import 'src/core/themes/themes.dart';
 
@@ -15,6 +17,7 @@ void main() async {
   Hive.init(path.path);
   repoDi();
   setupAuthLocator();
+  setupPostLocator();
   runApp(const MyApp());
 }
 
@@ -40,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Scroll Challenge',
+      title: 'Tag App',
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: AppTheme().lightTheme,
@@ -50,11 +53,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return child ?? const SizedBox.shrink();
       },
-      home: Scaffold(
-        body: Center(
-          child: Text("Scroll Challenge", style: Theme.of(context).textTheme.headlineLarge,),
-        )
-      ),
+      home: const PostView(),
       
     );
   }
