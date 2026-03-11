@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:tag_app/src/core/shared/reactive_notifier/process_notifier.dart';
-import 'package:tag_app/src/core/shared/reactive_notifier/snackbar_notifier.dart';
-import 'package:tag_app/src/core/utils/helpers/handle_future_request.dart';
+import 'package:pagination_pkg/pagination_pkg.dart';
+import 'package:tag_app/src/app/helpers/pagination_response_converter.dart';
 import '../../domain/entities/post.dart';
 import '../../domain/usecases/get_posts_use_case.dart';
 
@@ -10,26 +9,23 @@ final class PostController extends ChangeNotifier {
 
   final GetPostsUseCase _getPosts;
 
-  final ProcessStatusNotifier processNotifier = ProcessStatusNotifier(
-    initialStatus: ProcessLoading(message: 'Loading'),
-  );
+  late final InfinityScrollPaginationController<String, Post> pagination =
+      InfinityScrollPaginationController<String, Post>(
+        maxCapacityCount: 500,
+        onDemandPageCall: ({required onDemandPage}) async {
+          final res = await _getPosts(
+            page: onDemandPage.pageNo,
+            limit: onDemandPage.limit,
+          );
+          return res.toPostPaginationResponse(onDemandPage: onDemandPage);
+        },
+      );
 
-  List<Post> _posts = const <Post>[];
+  void refresh() => pagination.refresh();
 
-  List<Post> get posts => _posts;
-
-  Future<void> load({
-    SnackbarNotifier? errorSnackbarNotifier,
-  }) async {
-    final result = await handleFutureRequest<List<Post>>(
-      futureRequest: () => _getPosts(page: 1, limit: 20),
-      processStatusNotifier: processNotifier,
-      errorSnackbarNotifier: errorSnackbarNotifier,
-      onSuccess: (data) => _posts = data,
-    );
-    if (result == null) {
-      processNotifier.setError(message: 'Failed');
-    }
-    notifyListeners();
+  @override
+  void dispose() {
+    pagination.dispose();
+    super.dispose();
   }
 }

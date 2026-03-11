@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tag_app/src/core/shared/reactive_notifier/process_notifier.dart';
-import 'package:tag_app/src/core/shared/reactive_notifier/snackbar_notifier.dart';
+import 'package:tag_app/src/core/shared/widget/paginated_list.dart';
 import '../../post.dart';
 
 class PostView extends StatefulWidget {
@@ -16,57 +15,27 @@ class _PostViewState extends State<PostView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _controller.load(
-        errorSnackbarNotifier: SnackbarNotifier(context: context),
-      );
-    });
+    _controller.refresh();
   }
 
   @override
   void dispose() {
-    _controller.processNotifier.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PaginatedListWidget<String, Post>(
       appBar: AppBar(title: const Text('Posts')),
-      body: AnimatedBuilder(
-        animation: Listenable.merge([
-          _controller,
-          _controller.processNotifier,
-        ]),
-        builder: (context, _) {
-          if (_controller.processNotifier.status is ProcessLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (_controller.processNotifier.status is ProcessFailed) {
-            return Center(
-              child: TextButton(
-                onPressed: () {
-                  _controller.load(
-                    errorSnackbarNotifier: SnackbarNotifier(context: context),
-                  );
-                },
-                child: const Text('Retry'),
-              ),
-            );
-          }
-          if (_controller.posts.isEmpty) {
-            return const Center(child: Text('No posts found'));
-          }
-          return ListView.separated(
-            padding: const EdgeInsets.all(16),
-            itemCount: _controller.posts.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 12),
-            itemBuilder: (context, index) {
-              final post = _controller.posts[index];
-              return _PostCard(post: post);
-            },
-          );
-        },
+      pagination: _controller.pagination,
+      skeleton: const Center(child: CircularProgressIndicator()),
+      skeletonCount: 1,
+      isPaginated: true,
+      scrollDirection: Axis.vertical,
+      builder: (index, post) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        child: _PostCard(post: post),
       ),
     );
   }
