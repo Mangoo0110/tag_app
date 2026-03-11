@@ -1,12 +1,12 @@
 import 'package:app_pigeon/app_pigeon.dart';
 import 'package:async_handler/async_handler.dart';
+import 'package:flutter/widgets.dart';
 import 'package:tag_app/src/core/constants/api_endpoints.dart';
 import 'package:tag_app/src/core/utils/extensions/app_pigeon_response_handler.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/entities/product_page.dart';
 import '../../domain/entities/product_query_params.dart';
 import '../models/product/product_model.dart';
-import '../models/product_page_model.dart';
 
 final class ProductRemoteDataSource with ErrorHandler {
   ProductRemoteDataSource(this._appPigeon);
@@ -17,39 +17,39 @@ final class ProductRemoteDataSource with ErrorHandler {
     final skip = (params.page - 1) * params.limit;
     final response = await _appPigeon.get(
       ApiEndpoints.getProducts,
-      queryParameters: <String, dynamic>{
-        'limit': params.limit,
-        'skip': skip,
-      },
+      queryParameters: params.toMap()
     );
     final body = response.data;
-    if (body is Map<String, dynamic>) {
-      return ProductPageModel.fromMap(body).toEntity();
+    final List<ProductModel> products = [];
+    final rawList = response.data['products'] as List<dynamic>;
+    int cnt = 1;
+    for(final data in rawList) {
+      try {
+        debugPrint('cnt: $cnt');
+        debugPrint(data.toString());
+        products.add(ProductModel.fromMap(data));
+        cnt++;
+      } catch (e) {
+        debugPrint(e.toString());
+      }
     }
-    if (body is List) {
-      final items = body
-          .whereType<Map>()
-          .map((e) => ProductModel.fromMap(e.cast<String, dynamic>()))
-          .toList();
-      return ProductPage(
-        items: items.map((e) => e.toEntity()).toList(),
+    return ProductPage(
+        items: products,
         page: params.page,
         limit: params.limit,
-        total: items.length,
+        total: products.length,
       );
-    }
-    throw ServerException();
   }
 
   Future<Product?> getProductById(String id) async {
     final response = await _appPigeon.get(ApiEndpoints.singleProduct(id));
     final body = response.data;
     if (body is Map<String, dynamic>) {
-      return ProductModel.fromMap(body).toEntity();
+      return ProductModel.fromMap(body);
     }
     final wrapped = extractBodyData(response);
     if (wrapped is Map<String, dynamic>) {
-      return ProductModel.fromMap(wrapped).toEntity();
+      return ProductModel.fromMap(wrapped);
     }
     return null;
   }

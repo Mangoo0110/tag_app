@@ -84,13 +84,12 @@ class ProductModelMapper extends ClassMapperBase<ProductModel> {
     _$weight,
     opt: true,
   );
-  static ProductDimensionsModel? _$dimensions(ProductModel v) => v.dimensions;
   static const Field<ProductModel, ProductDimensionsModel> _f$dimensions =
-      Field('dimensions', _$dimensions, opt: true);
-  static ProductMetaModel? _$meta(ProductModel v) => v.meta;
+      Field('dimensions', null, mode: FieldMode.param, opt: true);
   static const Field<ProductModel, ProductMetaModel> _f$meta = Field(
     'meta',
-    _$meta,
+    null,
+    mode: FieldMode.param,
     opt: true,
   );
   static String? _$warrantyInformation(ProductModel v) => v.warrantyInformation;
@@ -111,10 +110,10 @@ class ProductModelMapper extends ClassMapperBase<ProductModel> {
     _$availabilityStatus,
     opt: true,
   );
-  static List<ProductReviewModel>? _$reviews(ProductModel v) => v.reviews;
   static const Field<ProductModel, List<ProductReviewModel>> _f$reviews = Field(
     'reviews',
-    _$reviews,
+    null,
+    mode: FieldMode.param,
     opt: true,
   );
   static String? _$returnPolicy(ProductModel v) => v.returnPolicy;
@@ -258,19 +257,6 @@ extension ProductModelValueCopy<$R, $Out>
 abstract class ProductModelCopyWith<$R, $In extends ProductModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get tags;
-  ProductDimensionsModelCopyWith<
-    $R,
-    ProductDimensionsModel,
-    ProductDimensionsModel
-  >?
-  get dimensions;
-  ProductMetaModelCopyWith<$R, ProductMetaModel, ProductMetaModel>? get meta;
-  ListCopyWith<
-    $R,
-    ProductReviewModel,
-    ProductReviewModelCopyWith<$R, ProductReviewModel, ProductReviewModel>
-  >?
-  get reviews;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get images;
   $R call({
     int? id,
@@ -317,30 +303,6 @@ class _ProductModelCopyWithImpl<$R, $Out>
         )
       : null;
   @override
-  ProductDimensionsModelCopyWith<
-    $R,
-    ProductDimensionsModel,
-    ProductDimensionsModel
-  >?
-  get dimensions =>
-      $value.dimensions?.copyWith.$chain((v) => call(dimensions: v));
-  @override
-  ProductMetaModelCopyWith<$R, ProductMetaModel, ProductMetaModel>? get meta =>
-      $value.meta?.copyWith.$chain((v) => call(meta: v));
-  @override
-  ListCopyWith<
-    $R,
-    ProductReviewModel,
-    ProductReviewModelCopyWith<$R, ProductReviewModel, ProductReviewModel>
-  >?
-  get reviews => $value.reviews != null
-      ? ListCopyWith(
-          $value.reviews!,
-          (v, t) => v.copyWith.$chain(t),
-          (v) => call(reviews: v),
-        )
-      : null;
-  @override
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>? get images =>
       $value.images != null
       ? ListCopyWith(
@@ -363,12 +325,12 @@ class _ProductModelCopyWithImpl<$R, $Out>
     Object? brand = $none,
     Object? sku = $none,
     Object? weight = $none,
-    Object? dimensions = $none,
-    Object? meta = $none,
+    ProductDimensionsModel? dimensions,
+    ProductMetaModel? meta,
     Object? warrantyInformation = $none,
     Object? shippingInformation = $none,
     Object? availabilityStatus = $none,
-    Object? reviews = $none,
+    List<ProductReviewModel>? reviews,
     Object? returnPolicy = $none,
     Object? minimumOrderQuantity = $none,
     Object? thumbnail = $none,
@@ -387,14 +349,14 @@ class _ProductModelCopyWithImpl<$R, $Out>
       if (brand != $none) #brand: brand,
       if (sku != $none) #sku: sku,
       if (weight != $none) #weight: weight,
-      if (dimensions != $none) #dimensions: dimensions,
-      if (meta != $none) #meta: meta,
+      #dimensions: dimensions,
+      #meta: meta,
       if (warrantyInformation != $none)
         #warrantyInformation: warrantyInformation,
       if (shippingInformation != $none)
         #shippingInformation: shippingInformation,
       if (availabilityStatus != $none) #availabilityStatus: availabilityStatus,
-      if (reviews != $none) #reviews: reviews,
+      #reviews: reviews,
       if (returnPolicy != $none) #returnPolicy: returnPolicy,
       if (minimumOrderQuantity != $none)
         #minimumOrderQuantity: minimumOrderQuantity,
@@ -419,8 +381,8 @@ class _ProductModelCopyWithImpl<$R, $Out>
     brand: data.get(#brand, or: $value.brand),
     sku: data.get(#sku, or: $value.sku),
     weight: data.get(#weight, or: $value.weight),
-    dimensions: data.get(#dimensions, or: $value.dimensions),
-    meta: data.get(#meta, or: $value.meta),
+    dimensions: data.get(#dimensions),
+    meta: data.get(#meta),
     warrantyInformation: data.get(
       #warrantyInformation,
       or: $value.warrantyInformation,
@@ -433,7 +395,7 @@ class _ProductModelCopyWithImpl<$R, $Out>
       #availabilityStatus,
       or: $value.availabilityStatus,
     ),
-    reviews: data.get(#reviews, or: $value.reviews),
+    reviews: data.get(#reviews),
     returnPolicy: data.get(#returnPolicy, or: $value.returnPolicy),
     minimumOrderQuantity: data.get(
       #minimumOrderQuantity,

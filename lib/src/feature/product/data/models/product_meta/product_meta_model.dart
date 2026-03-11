@@ -1,21 +1,19 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import '../../../domain/entities/product_meta.dart';
 
-part 'product_meta_model.mappable.dart';
+part 'product_meta_model.mapper.dart';
 
 @MappableClass()
-class ProductMetaModel with ProductMetaModelMappable {
+class ProductMetaModel extends ProductMeta with ProductMetaModelMappable {
   const ProductMetaModel({
-    this.createdAt,
-    this.updatedAt,
-    this.barcode,
-    this.qrCode,
+    super.createdAt,
+    super.updatedAt,
+    super.barcode,
+    super.qrCode,
   });
 
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final String? barcode;
-  final String? qrCode;
+  factory ProductMetaModel.fromMap(Map<String, dynamic> json) =>
+      ProductMetaModelMapper.fromMap(json);
 
   factory ProductMetaModel.fromEntity(ProductMeta entity) {
     return ProductMetaModel(
@@ -23,15 +21,6 @@ class ProductMetaModel with ProductMetaModelMappable {
       updatedAt: entity.updatedAt,
       barcode: entity.barcode,
       qrCode: entity.qrCode,
-    );
-  }
-
-  ProductMeta toEntity() {
-    return ProductMeta(
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-      barcode: barcode,
-      qrCode: qrCode,
     );
   }
 }
