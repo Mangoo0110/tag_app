@@ -22,9 +22,9 @@ base class ApiEndpoints {
 }
 
 class _RemoteServer {
-  static const String socketUrl = 'https://fakestoreapi.com';
+  static const String socketUrl = 'https://dummyjson.com';
 
-  static const String baseUrl = 'https://fakestoreapi.com';
+  static const String baseUrl = 'https://dummyjson.com';
 }
 
 class _LocalHostWifi {
