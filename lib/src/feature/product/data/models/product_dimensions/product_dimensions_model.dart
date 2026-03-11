@@ -4,16 +4,16 @@ import '../../../domain/entities/product_dimensions.dart';
 part 'product_dimensions_model.mapper.dart';
 
 @MappableClass()
-class ProductDimensionsModel with ProductDimensionsModelMappable {
+class ProductDimensionsModel extends ProductDimensions
+    with ProductDimensionsModelMappable {
   const ProductDimensionsModel({
-    required this.width,
-    required this.height,
-    required this.depth,
+    required super.width,
+    required super.height,
+    required super.depth,
   });
 
-  final double width;
-  final double height;
-  final double depth;
+  factory ProductDimensionsModel.fromMap(Map<String, dynamic> json) =>
+      ProductDimensionsModelMapper.fromMap(json);
 
   factory ProductDimensionsModel.fromEntity(ProductDimensions entity) {
     return ProductDimensionsModel(
@@ -21,9 +21,5 @@ class ProductDimensionsModel with ProductDimensionsModelMappable {
       height: entity.height,
       depth: entity.depth,
     );
-  }
-
-  ProductDimensions toEntity() {
-    return ProductDimensions(width: width, height: height, depth: depth);
   }
 }

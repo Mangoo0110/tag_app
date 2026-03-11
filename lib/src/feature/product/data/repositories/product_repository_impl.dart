@@ -28,22 +28,12 @@ class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
   AsyncRequest<ProductPage> getProducts(ProductQueryParams params) async {
     final remote = await asyncTryCatch<ProductPage>(
       tryFunc: () async {
-        _debugger.dekhao('Fetching products with params: $params');
+        _debugger.dekhao('Fetching products with params:::: ${params.toMap().toString()}');
+        
         final page = await _remote.getProducts(params);
-        final filtered = _filterProducts(page.items, params);
-        _debugger.dekhao("Filtered products count: ${filtered.length}");
-        final pageItems = _paginate(
-          items: filtered,
-          page: params.page,
-          limit: params.limit,
-        );
+
         return SuccessResponse<ProductPage>(
-          data: ProductPage(
-            items: pageItems,
-            page: params.page,
-            limit: params.limit,
-            total: page.total,
-          ),
+          data: page
         );
       },
     );
@@ -78,7 +68,7 @@ class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
         );
         List<ProductVariant> variants = const <ProductVariant>[];
         for (final product in products) {
-          if (product.id == productId) {
+          if (product.id.toString() == productId) {
             variants = product.variants;
             break;
           }
@@ -102,7 +92,7 @@ class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
         return false;
       }
       if (params.categoryId != null &&
-          !product.categoryIds.contains(params.categoryId)) {
+          product.category != params.categoryId) {
         return false;
       }
       if (query.isNotEmpty && !product.name.toLowerCase().contains(query)) {

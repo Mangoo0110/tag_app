@@ -4,20 +4,17 @@ import '../../../domain/entities/product_review.dart';
 part 'product_review_model.mapper.dart';
 
 @MappableClass()
-class ProductReviewModel with ProductReviewModelMappable {
+class ProductReviewModel extends ProductReview with ProductReviewModelMappable {
   const ProductReviewModel({
-    required this.rating,
-    required this.comment,
-    required this.date,
-    required this.reviewerName,
-    required this.reviewerEmail,
+    required super.rating,
+    required super.comment,
+    required super.date,
+    required super.reviewerName,
+    required super.reviewerEmail,
   });
 
-  final int rating;
-  final String comment;
-  final DateTime date;
-  final String reviewerName;
-  final String reviewerEmail;
+  factory ProductReviewModel.fromMap(Map<String, dynamic> json) =>
+      ProductReviewModelMapper.fromMap(json);
 
   factory ProductReviewModel.fromEntity(ProductReview entity) {
     return ProductReviewModel(
@@ -26,16 +23,6 @@ class ProductReviewModel with ProductReviewModelMappable {
       date: entity.date,
       reviewerName: entity.reviewerName,
       reviewerEmail: entity.reviewerEmail,
-    );
-  }
-
-  ProductReview toEntity() {
-    return ProductReview(
-      rating: rating,
-      comment: comment,
-      date: date,
-      reviewerName: reviewerName,
-      reviewerEmail: reviewerEmail,
     );
   }
 }
