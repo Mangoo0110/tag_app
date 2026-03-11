@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:app_pigeon/app_pigeon.dart';
+import 'package:tag_app/src/di/auth_di.dart';
 import 'package:tag_app/src/feature/category/data/repositories/category_repository_impl.dart';
 import 'package:tag_app/src/feature/category/data/repositories/mock_category_repository.dart';
 import 'package:tag_app/src/feature/category/domain/repositories/category_repository.dart';
@@ -26,33 +27,15 @@ void initDependency() async {
     () => GhostPigeon(baseUrl: ApiEndpoints.baseUrl),
   );
 
-  serviceLocator.registerLazySingleton<ProductRemoteDataSource>(
-    () => ProductRemoteDataSource(serviceLocator<AppPigeon>()),
-  );
-
-  serviceLocator.registerLazySingleton<ProductRepository>(
-    () => ProductRepositoryImpl(
-      fallbackRepo: MockProductRepository(),
-      remote: serviceLocator<ProductRemoteDataSource>(),
-    ),
-  );
-
-  serviceLocator.registerLazySingleton<GetProductsUseCase>(
-    () => GetProductsUseCase(serviceLocator<ProductRepository>()),
-  );
-  serviceLocator.registerLazySingleton<GetProductByIdUseCase>(
-    () => GetProductByIdUseCase(serviceLocator<ProductRepository>()),
-  );
-  serviceLocator.registerLazySingleton<GetVariantsByProductIdUseCase>(
-    () => GetVariantsByProductIdUseCase(serviceLocator<ProductRepository>()),
-  );
+  setupAuthLocator();
+  
+  setupPostLocator();
 
   serviceLocator.registerLazySingleton<CategoryRepository>(
     () =>
         CategoryRepositoryImpl(appPigeon: serviceLocator<AppPigeon>()),
     //MockCategoryRepository(),
   );
-
   serviceLocator.registerLazySingleton<GetCategoriesUseCase>(
     () => GetCategoriesUseCase(serviceLocator<CategoryRepository>()),
   );
@@ -64,6 +47,27 @@ void initDependency() async {
   );
   serviceLocator.registerLazySingleton<CategoryController>(
     () => CategoryController(serviceLocator<GetCategoriesUseCase>()),
+  );
+
+
+  serviceLocator.registerLazySingleton<ProductRemoteDataSource>(
+    () => ProductRemoteDataSource(serviceLocator<AppPigeon>()),
+  );
+
+  serviceLocator.registerLazySingleton<ProductRepository>(
+    () => ProductRepositoryImpl(
+      fallbackRepo: MockProductRepository(),
+      remote: serviceLocator<ProductRemoteDataSource>(),
+    ),
+  );
+  serviceLocator.registerLazySingleton<GetProductsUseCase>(
+    () => GetProductsUseCase(serviceLocator<ProductRepository>()),
+  );
+  serviceLocator.registerLazySingleton<GetProductByIdUseCase>(
+    () => GetProductByIdUseCase(serviceLocator<ProductRepository>()),
+  );
+  serviceLocator.registerLazySingleton<GetVariantsByProductIdUseCase>(
+    () => GetVariantsByProductIdUseCase(serviceLocator<ProductRepository>()),
   );
 
   setupPostLocator();

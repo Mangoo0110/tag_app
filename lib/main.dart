@@ -16,8 +16,7 @@ void main() async {
   final path = await getApplicationCacheDirectory();
   Hive.init(path.path);
   initDependency();
-  setupAuthLocator();
-  setupPostLocator();
+  
   runApp(const MyApp());
 }
 

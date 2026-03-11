@@ -14,7 +14,7 @@ extension ProductPaginationResponseConverter on ApiResponse<ProductPage> {
         }
         final items = <String, Product>{};
         for (var product in data!.items) {
-          items[product.id] = product;
+          items[product.id.toString()] = product;
         }
         return PaginationPage(
           items: items,

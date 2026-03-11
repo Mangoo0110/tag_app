@@ -16,30 +16,30 @@ class _HomeHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: SearchInput(
-                  controller: searchController,
-                  onSubmitted: onSearchPressed,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: SearchInput(
+          //         controller: searchController,
+          //         onSubmitted: onSearchPressed,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(height: 12),
 
-          SizedBox(
-            height: 34,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final labels = ['Safe Payment', 'Fast Delivery', 'Free Return'];
-                return Chip(label: Text(labels[index]));
-              },
-              separatorBuilder: (_, __) => const SizedBox(width: 8),
-              itemCount: 3,
-            ),
-          ),
+          // SizedBox(
+          //   height: 34,
+          //   child: ListView.separated(
+          //     scrollDirection: Axis.horizontal,
+          //     itemBuilder: (context, index) {
+          //       final labels = ['Safe Payment', 'Fast Delivery', 'Free Return'];
+          //       return Chip(label: Text(labels[index]));
+          //     },
+          //     separatorBuilder: (_, __) => const SizedBox(width: 8),
+          //     itemCount: 3,
+          //   ),
+          // ),
 
           const SizedBox(height: 12),
 

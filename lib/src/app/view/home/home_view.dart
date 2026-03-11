@@ -56,7 +56,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     if (_categoryPagination.state.value == PaginationLoadState.loaded) {
       _setTabController();
     } else if (_categoryPagination.state.value == PaginationLoadState.error) {
-      _error = "Failed to load categories. Please try again.";
+      _error = "Failed to load categories. Please try reloading the page!";
       setState(() {});
     }
   }
@@ -81,8 +81,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     for (int index = 0; index < _categoryPagination.length; index++) {
       final category = _categoryPagination.itemAt(index);
       if (category == null) continue;
-      _tapProductsPaginations[category
-          .id] = InfinityScrollPaginationController<String, Product>(
+      _tapProductsPaginations[category.id] = InfinityScrollPaginationController<String, Product>(
         maxCapacityCount: 100,
         onDemandPageCall: ({required onDemandPage}) async {
           final res = await serviceLocator<GetProductsUseCase>().call(
@@ -175,33 +174,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             ),
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
-                // CupertinoSliverRefreshControl(
-                //   onRefresh: _handleRefresh,
-                //   builder: (context, refreshState, pulledExtent, refreshTriggerPullDistance, refreshIndicatorExtent) {
-                //     return Padding(
-                //       padding: const EdgeInsets.only(top: 100),
-                //       child: CupertinoSliverRefreshControl.buildRefreshIndicator(
-                //         context,
-                //         refreshState,
-                //         pulledExtent,
-                //         refreshTriggerPullDistance,
-                //         refreshIndicatorExtent,
-                //       ),
-                //     );
-                //   },
-                // ),
-                // CupertinoSliverRefreshControl(
-                //   refreshTriggerPullDistance: 110,
-                //   refreshIndicatorExtent: 80,
-                //   onRefresh: _handleRefresh,
-                //   builder: (context, mode, pulledExtent, _, __) {
-                //     final progress = (pulledExtent / 110).clamp(0.0, 1.0);
-                //     return _DarazRefreshIndicator(
-                //       mode: mode,
-                //       progress: progress,
-                //     );
-                //   },
-                // ),
           
                 SliverSafeArea(
                   bottom: false,
@@ -282,7 +254,7 @@ class _TabProductGridState extends State<_TabProductGrid> {
           pagination: widget.pagination,
           skeleton: const Center(child: CircularProgressIndicator()),
           skeletonCount: 1,
-          gridDelegate: sliverGridDelegateConfig1(),
+          gridDelegate: sliverGridDelegateConfig2(),
           itemBuilder: (index, data) {
             return Padding(
               padding: const EdgeInsets.only(right: 2.0),
