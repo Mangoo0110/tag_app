@@ -22,7 +22,7 @@ Clean-architecture Flutter app using DummyJSON as the backend.
 
 - `app_pigeon`: HTTP client wrapper
 - `dart_mappable`: model mapping (`*.mapper.dart`)
-- `pagination_pkg`: pagination engine + widgets
+- `pagination_pkg`: pagination engine
 - `async_handler`: async error handling & response wrapper
 - `get_it`: dependency injection
 - `hive_ce`: local storage (if/when used)

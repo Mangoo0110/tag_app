@@ -1,7 +1,7 @@
 import 'package:app_pigeon/app_pigeon.dart';
+import 'package:flutter/material.dart';
 import 'package:tag_app/src/core/constants/api_endpoints.dart';
 import 'package:async_handler/async_handler.dart';
-import 'package:tag_app/src/core/utils/extensions/app_pigeon_response_handler.dart';
 import '../models/category_model.dart';
 import '../../domain/entities/category.dart';
 import '../../domain/repositories/category_repository.dart';
@@ -63,8 +63,7 @@ class CategoryRepositoryImpl with ErrorHandler implements CategoryRepository  {
         }
 
         final categories =
-            names
-                .map(
+            names.map(
                   (name) => CategoryModel(
                     id: name,
                     name: name,
@@ -83,22 +82,9 @@ class CategoryRepositoryImpl with ErrorHandler implements CategoryRepository  {
     );
   }
 
-  List<Map<String, dynamic>> _extractProductList(Response<dynamic> response) {
-    final dynamic body = response.data;
-    if (body is List) {
-      return body
-          .whereType<Map>()
-          .map((e) => Map<String, dynamic>.from(e))
-          .toList();
-    }
-
-    final dynamic wrapped = extractBodyData(response);
-    if (wrapped is List) {
-      return wrapped
-          .whereType<Map>()
-          .map((e) => Map<String, dynamic>.from(e))
-          .toList();
-    }
-    return const <Map<String, dynamic>>[];
+  List<dynamic> _extractProductList(Response<dynamic> response) {
+    debugPrint(response.data.toString());
+    return response.data['products'] as List<dynamic>;
   }
 }
+
