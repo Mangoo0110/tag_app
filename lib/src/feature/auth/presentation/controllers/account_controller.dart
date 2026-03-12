@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:tag_app/src/core/shared/reactive_notifier/snackbar_notifier.dart';
 import 'package:tag_app/src/core/utils/helpers/handle_future_request.dart';
+import 'package:tag_app/src/core/usecase/usecase.dart';
 import 'package:tag_app/src/feature/auth/domain/entities/auth_user.dart';
 import 'package:tag_app/src/feature/auth/domain/usecases/get_current_user_use_case.dart';
 import 'package:tag_app/src/feature/auth/domain/usecases/logout_use_case.dart';
@@ -28,7 +29,7 @@ final class AccountController extends ChangeNotifier {
     notifyListeners();
 
     _currentUser = await handleFutureRequest<AuthUser>(
-      futureRequest: () => _getCurrentUser(),
+      futureRequest: () => _getCurrentUser(NoParams()),
       errorSnackbarNotifier: errorSnackbarNotifier,
     );
 
@@ -44,7 +45,7 @@ final class AccountController extends ChangeNotifier {
     notifyListeners();
 
     await handleFutureRequest<void>(
-      futureRequest: () => _logout(),
+      futureRequest: () => _logout(NoParams()),
       errorSnackbarNotifier: errorSnackbarNotifier,
       successSnackbarNotifier: successSnackbarNotifier,
       onSuccess: (_) {
