@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:async_handler/async_handler.dart';
 import 'package:tag_app/src/feature/auth/data/datasources/auth_local_data_source.dart';
 import 'package:tag_app/src/feature/auth/data/datasources/auth_remote_data_source.dart';
@@ -40,19 +41,28 @@ final class AuthRepositoryImpl with ErrorHandler implements AuthRepository {
   @override
   AsyncRequest<AuthUser> getCurrentUser() => asyncTryCatch<AuthUser>(
     tryFunc: () async {
-      final current = await _local.getCurrentAuthRecord();
-      if (current == null) {
-        throw NoDataException();
+      try {
+        final current = await _remote.getCurrentUser();
+        return SuccessResponse<AuthUser>(
+          message: 'Fetched current user',
+          data: current,
+        );
+      } catch (e) {
+        if (_isNetworkError(e)) {
+          final cached = await _local.getCurrentAuthRecord();
+          final userMap = (cached?.data as Map?)?.cast<String, dynamic>();
+          if (userMap != null) {
+            return SuccessResponse<AuthUser>(
+              message: 'Fetched cached user (offline)',
+              data: AuthUserModel.fromMap(userMap),
+            );
+          }
+        }
+        if (e is Exception) {
+          rethrow;
+        }
+        throw ServerException();
       }
-
-      final userMap = (current.data as Map?)?.cast<String, dynamic>();
-      if (userMap == null) {
-        throw NoDataException();
-      }
-      return SuccessResponse<AuthUser>(
-        message: 'Fetched current user',
-        data: AuthUserModel.fromMap(userMap),
-      );
     },
   );
 
@@ -93,4 +103,23 @@ final class AuthRepositoryImpl with ErrorHandler implements AuthRepository {
   Stream<bool> get isLoggedIn => _local.isLoggedIn;
 
   
+}
+
+bool _isNetworkError(Object error) {
+  if (error is SocketException) return true;
+  if (error.runtimeType.toString() == 'DioException') {
+    try {
+      final dynamic e = error;
+      final dynamic inner = e.error;
+      if (inner is SocketException) return true;
+      final typeName = e.type?.toString() ?? '';
+      if (typeName.contains('connectionTimeout') ||
+          typeName.contains('receiveTimeout') ||
+          typeName.contains('sendTimeout') ||
+          typeName.contains('connectionError')) {
+        return true;
+      }
+    } catch (_) {}
+  }
+  return false;
 }

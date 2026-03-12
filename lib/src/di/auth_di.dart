@@ -76,12 +76,6 @@ void setupAuthLocator() {
     );
   }
 
-  if (!authServiceLocatior.isRegistered<LoginController>()) {
-    authServiceLocatior.registerLazySingleton<LoginController>(
-      () => LoginController(authServiceLocatior<LoginUseCase>()),
-    );
-  }
-
   if (!authServiceLocatior.isRegistered<AccountController>()) {
     authServiceLocatior.registerLazySingleton<AccountController>(
       () => AccountController(

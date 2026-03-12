@@ -14,6 +14,7 @@ base class ApiEndpoints {
   /// ### get
   static const String users = '$baseUrl/users';
   static String getUserProfile(String userId) => '$baseUrl/users/$userId';
+  static const String currentUser = '$baseUrl/users/me';
 
   // ---------------------- PRODUCT -----------------------------
   static const String getProducts = '$baseUrl/products';

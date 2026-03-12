@@ -65,6 +65,7 @@ extension PostPaginationResponseConverter on ApiResponse<List<Post>> {
 
 extension CategoryPaginationResponseConverter on ApiResponse<List<Category>> {
   PageFetchResponse<String, Category> toCategoryPaginationResponse({required OnDemandPage<Category> onDemandPage}) {
+    debugPrint("response type:::: $runtimeType");
     switch (this) {
       case SuccessResponse<List<Category>> _:
         if (data == null) {

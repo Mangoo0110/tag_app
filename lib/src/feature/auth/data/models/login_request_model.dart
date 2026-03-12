@@ -8,21 +8,15 @@ class LoginRequestModel extends LoginRequestEntity with LoginRequestModelMappabl
   const LoginRequestModel({
     required super.username,
     required super.password,
-    super.shouldRemember,
+    super.expiresIn,
   });
 
   factory LoginRequestModel.fromEntity(LoginRequestEntity entity) {
     return LoginRequestModel(
       username: entity.username,
       password: entity.password,
-      shouldRemember: entity.shouldRemember,
+      expiresIn: entity.expiresIn,
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'username': username,
-      'password': password,
-    };
-  }
 }
