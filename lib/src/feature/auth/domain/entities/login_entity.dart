@@ -8,12 +8,12 @@ class LoginRequestEntity extends LoginEntity {
   const LoginRequestEntity({
     required this.username,
     required this.password,
-    this.shouldRemember = false,
+    this.expiresIn = 10,
   });
 
   final String username;
   final String password;
-  final bool? shouldRemember;
+  final int? expiresIn;
 }
 
 class LoginResponseEntity extends LoginEntity {

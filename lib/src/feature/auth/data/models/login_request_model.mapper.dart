@@ -32,26 +32,26 @@ class LoginRequestModelMapper extends ClassMapperBase<LoginRequestModel> {
     'password',
     _$password,
   );
-  static bool? _$shouldRemember(LoginRequestModel v) => v.shouldRemember;
-  static const Field<LoginRequestModel, bool> _f$shouldRemember = Field(
-    'shouldRemember',
-    _$shouldRemember,
+  static int? _$expiresIn(LoginRequestModel v) => v.expiresIn;
+  static const Field<LoginRequestModel, int> _f$expiresIn = Field(
+    'expiresIn',
+    _$expiresIn,
     opt: true,
-    def: false,
+    def: 10,
   );
 
   @override
   final MappableFields<LoginRequestModel> fields = const {
     #username: _f$username,
     #password: _f$password,
-    #shouldRemember: _f$shouldRemember,
+    #expiresIn: _f$expiresIn,
   };
 
   static LoginRequestModel _instantiate(DecodingData data) {
     return LoginRequestModel(
       username: data.dec(_f$username),
       password: data.dec(_f$password),
-      shouldRemember: data.dec(_f$shouldRemember),
+      expiresIn: data.dec(_f$expiresIn),
     );
   }
 
@@ -126,7 +126,7 @@ abstract class LoginRequestModelCopyWith<
   $Out
 >
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? username, String? password, bool? shouldRemember});
+  $R call({String? username, String? password, int? expiresIn});
   LoginRequestModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
   );
@@ -141,22 +141,19 @@ class _LoginRequestModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LoginRequestModel> $mapper =
       LoginRequestModelMapper.ensureInitialized();
   @override
-  $R call({
-    String? username,
-    String? password,
-    Object? shouldRemember = $none,
-  }) => $apply(
-    FieldCopyWithData({
-      if (username != null) #username: username,
-      if (password != null) #password: password,
-      if (shouldRemember != $none) #shouldRemember: shouldRemember,
-    }),
-  );
+  $R call({String? username, String? password, Object? expiresIn = $none}) =>
+      $apply(
+        FieldCopyWithData({
+          if (username != null) #username: username,
+          if (password != null) #password: password,
+          if (expiresIn != $none) #expiresIn: expiresIn,
+        }),
+      );
   @override
   LoginRequestModel $make(CopyWithData data) => LoginRequestModel(
     username: data.get(#username, or: $value.username),
     password: data.get(#password, or: $value.password),
-    shouldRemember: data.get(#shouldRemember, or: $value.shouldRemember),
+    expiresIn: data.get(#expiresIn, or: $value.expiresIn),
   );
 
   @override

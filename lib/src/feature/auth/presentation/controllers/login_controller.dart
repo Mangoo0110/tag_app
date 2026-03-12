@@ -66,7 +66,6 @@ class LoginController extends ChangeNotifier {
         LoginRequestEntity(
           username: _username,
           password: _password,
-          shouldRemember: true,
         ),
       ),
       processStatusNotifier: processNotifier,
