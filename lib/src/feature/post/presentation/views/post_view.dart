@@ -137,13 +137,13 @@ class _TagChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),
+        color: Theme.of(context).primaryColor.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
         label,
         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.w600,
             ),
       ),
