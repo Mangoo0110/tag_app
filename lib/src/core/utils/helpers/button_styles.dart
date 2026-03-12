@@ -25,7 +25,12 @@ class AppButtonStyles {
           ),
         textStyle: WidgetStatePropertyAll(TextStyle(color: Colors.white).w500.regular),
         foregroundColor: WidgetStatePropertyAll(Colors.white),
-        shape: WidgetStatePropertyAll(RoundedRectangleBorder(side: BorderSide(color: Colors.transparent), borderRadius: AppSizes.rectangleButtonRadius))
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          side: BorderSide(color: Colors.transparent),
+          borderRadius: AppSizes.maxCircularRadius,
+        ),
+      )
       );
   }
 

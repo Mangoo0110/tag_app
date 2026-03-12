@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tag_app/src/core/themes/app_colors.dart';
 import 'package:tag_app/src/feature/product/domain/entities/product.dart';
 import 'package:tag_app/src/feature/product/presentation/views/product_detail_view.dart';
 
@@ -128,9 +129,7 @@ class ProductCard2 extends StatelessWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primary
+                                color: Theme.of(context).colorScheme.primary
                                     .withValues(alpha: 0.08),
                                 borderRadius: BorderRadius.circular(12),
                               ),

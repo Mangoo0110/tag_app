@@ -6,6 +6,7 @@ import 'package:tag_app/src/app/routing/app_router.dart';
 import 'package:tag_app/src/di/auth_di.dart';
 import 'package:tag_app/src/feature/post/post_di.dart';
 import 'package:tag_app/src/feature/post/presentation/views/post_view.dart';
+import 'package:tag_app/src/core/local_db/hive_db.dart';
 import 'src/di/repo_di.dart';
 import 'src/core/themes/themes.dart';
 
@@ -16,6 +17,8 @@ void main() async {
   final path = await getApplicationCacheDirectory();
   Hive.init(path.path);
   initDependency();
+  await HiveService().openBox(HiveBox.settings);
+  await AppManager().loadThemePreference();
   
   runApp(const MyApp());
 }
@@ -38,23 +41,28 @@ class _MyAppState extends State<MyApp> {
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Tag App',
-      debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
-      theme: AppTheme().lightTheme,
-      darkTheme: AppTheme().darkTheme,
-      themeMode: ThemeMode.light,
-      onGenerateRoute: AppRouter.onGenerateRoute,
-      builder: (context, child) {
-        return child ?? const SizedBox.shrink();
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: AppManager().themeMode,
+      builder: (context, mode, _) {
+        return MaterialApp(
+          title: 'Tag App',
+          debugShowCheckedModeBanner: false,
+          navigatorKey: navigatorKey,
+          theme: AppTheme().lightTheme,
+          darkTheme: AppTheme().darkTheme,
+          themeMode: mode,
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          builder: (context, child) {
+            return child ?? const SizedBox.shrink();
+          },
+          home: Scaffold(
+            body: Center(
+              child: Text("Tag App", style: Theme.of(context).textTheme.headlineLarge,),
+            )
+          ),
+          
+        );
       },
-      home: Scaffold(
-        body: Center(
-          child: Text("Tag App", style: Theme.of(context).textTheme.headlineLarge,),
-        )
-      ),
-      
     );
   }
 }

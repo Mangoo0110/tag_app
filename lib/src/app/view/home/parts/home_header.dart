@@ -49,11 +49,17 @@ class _HomeHeader extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 3,
               itemBuilder: (context, index) {
-                final colors = [
-                  const Color(0xFFFFE9D8),
-                  const Color(0xFFE7F6FF),
-                  const Color(0xFFFFE9F2),
-                ];
+                final colors = Theme.of(context).brightness == Brightness.dark
+                    ? [
+                        const Color.fromARGB(255, 255, 155, 79),
+                        const Color.fromARGB(255, 107, 198, 255),
+                        const Color.fromARGB(255, 255, 98, 163),
+                      ]
+                    : [
+                        const Color(0xFFFFE9D8),
+                        const Color(0xFFE7F6FF),
+                        const Color(0xFFFFE9F2),
+                      ];
                 return Container(
                   width: 260,
                   padding: const EdgeInsets.all(14),

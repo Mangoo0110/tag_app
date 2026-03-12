@@ -17,6 +17,6 @@ SliverGridDelegate sliverGridDelegateConfig2() {
     maxCrossAxisExtent: 250,
     crossAxisSpacing: 2,
     mainAxisSpacing: 12,
-    childAspectRatio: .7,
+    childAspectRatio: .65,
   );
 }

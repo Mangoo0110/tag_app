@@ -35,7 +35,7 @@ class AppTheme {
           foregroundColor: AppColors.light().primaryColor,
         ),
       ),
-      primaryColorLight: AppColors.light().primaryColor,
+      primaryColorLight: AppColors.light().primaryColor.withAlpha(100),
       primaryColorDark: AppColors.light().primaryColor,
       splashColor: AppColors.light().splashColor,
       highlightColor: AppColors.light().splashColor,
@@ -48,26 +48,10 @@ class AppTheme {
       useMaterial3: true,
       fontFamily: 'Public Sans',
       brightness: Brightness.light,
-      colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: MaterialColor(
-          AppColors.light().primaryColor.value,
-          {
-            50:  AppColors.light().primaryColor.withAlpha(25),
-            100: AppColors.light().primaryColor.withAlpha(50),
-            200: AppColors.light().primaryColor.withAlpha(76),
-            300: AppColors.light().primaryColor.withAlpha(102),
-            400: AppColors.light().primaryColor.withAlpha(128),
-            500: AppColors.light().primaryColor,
-            600: AppColors.light().primaryColor,
-            700: AppColors.light().primaryColor,
-            800: AppColors.light().primaryColor,
-            900: AppColors.light().primaryColor,
-          },
-        ),
-        accentColor: AppColors.light().primaryColor,
-        backgroundColor: AppColors.light().backgroundColor,
-        cardColor: AppColors.light().backgroundColor,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: AppColors.light().primaryColor,
         brightness: Brightness.light,
+        surface: AppColors.light().backgroundColor,
       ).copyWith(
         outline: AppColors.light().borderColor,
         outlineVariant: AppColors.light().dividerColor,
@@ -103,29 +87,14 @@ class AppTheme {
   ThemeData get darkTheme {
     return ThemeData(
       primaryColor: AppColors.dark().primaryColor,
-      primarySwatch:  MaterialColor(
-          AppColors.light().primaryColor.toARGB32(),
-          {
-            50:  AppColors.light().primaryColor.withAlpha(25),
-            100: AppColors.light().primaryColor.withAlpha(50),
-            200: AppColors.light().primaryColor.withAlpha(76),
-            300: AppColors.light().primaryColor.withAlpha(102),
-            400: AppColors.light().primaryColor.withAlpha(128),
-            500: AppColors.light().primaryColor,
-            600: AppColors.light().primaryColor,
-            700: AppColors.light().primaryColor,
-            800: AppColors.light().primaryColor,
-            900: AppColors.light().primaryColor,
-          },
-        ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColors.light().primaryColor,
+          foregroundColor: AppColors.dark().primaryColor,
         ),
       ),
       primaryTextTheme: DTextTheme.darkTextTheme,
-      primaryColorLight: AppColors.dark().textColor,
-      primaryColorDark: AppColors.dark().backgroundColor,
+      primaryColorLight: AppColors.dark().primaryColor.withAlpha(100),
+      primaryColorDark: AppColors.dark().primaryColor,
       splashColor: AppColors.dark().splashColor,
       highlightColor: AppColors.dark().primaryColor.withAlpha(175),
       hoverColor: AppColors.dark().primaryColor.withAlpha(175),
@@ -135,11 +104,10 @@ class AppTheme {
       useMaterial3: true,
       fontFamily: 'Poppins',
       brightness: Brightness.dark,
-      colorScheme: ColorScheme.fromSwatch(
-        accentColor: AppColors.dark().primaryColor,
-        backgroundColor: AppColors.dark().backgroundColor,
-        cardColor: AppColors.dark().backgroundColor,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: AppColors.dark().primaryColor,
         brightness: Brightness.dark,
+        surface: AppColors.dark().backgroundColor,
       ).copyWith(
         outline: AppColors.dark().borderColor,
         outlineVariant: AppColors.dark().dividerColor,
@@ -159,7 +127,6 @@ class AppTheme {
       tabBarTheme: DTabBarTheme.darkTabBarTheme,
       bottomNavigationBarTheme: DBottomNavigationBarThemes.darkBottomNavTheme,
       dividerTheme: DDividerTheme.darkDividerTheme,
-      indicatorColor: AppColors.dark().textColor,
       progressIndicatorTheme: ProgressIndicatorThemes.dark,
       datePickerTheme: DatePickerThemes.darkTheme,
       elevatedButtonTheme: ElevatedButtonThemes.dark,
