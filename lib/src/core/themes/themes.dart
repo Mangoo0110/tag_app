@@ -93,8 +93,8 @@ class AppTheme {
         ),
       ),
       primaryTextTheme: DTextTheme.darkTextTheme,
-      primaryColorLight: AppColors.dark().textColor,
-      primaryColorDark: AppColors.dark().backgroundColor,
+      primaryColorLight: AppColors.dark().primaryColor.withAlpha(100),
+      primaryColorDark: AppColors.dark().primaryColor,
       splashColor: AppColors.dark().splashColor,
       highlightColor: AppColors.dark().primaryColor.withAlpha(175),
       hoverColor: AppColors.dark().primaryColor.withAlpha(175),
@@ -107,7 +107,6 @@ class AppTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.dark().primaryColor,
         brightness: Brightness.dark,
-        background: AppColors.dark().backgroundColor,
         surface: AppColors.dark().backgroundColor,
       ).copyWith(
         outline: AppColors.dark().borderColor,
@@ -128,7 +127,6 @@ class AppTheme {
       tabBarTheme: DTabBarTheme.darkTabBarTheme,
       bottomNavigationBarTheme: DBottomNavigationBarThemes.darkBottomNavTheme,
       dividerTheme: DDividerTheme.darkDividerTheme,
-      indicatorColor: AppColors.dark().textColor,
       progressIndicatorTheme: ProgressIndicatorThemes.dark,
       datePickerTheme: DatePickerThemes.darkTheme,
       elevatedButtonTheme: ElevatedButtonThemes.dark,

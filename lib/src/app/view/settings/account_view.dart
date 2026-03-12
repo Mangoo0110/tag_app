@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tag_app/src/core/utils/utils.dart';
 import 'package:tag_app/src/di/auth_di.dart';
 import 'package:tag_app/src/core/shared/reactive_notifier/snackbar_notifier.dart';
 import 'package:tag_app/src/feature/auth/presentation/controllers/account_controller.dart';
@@ -44,7 +45,7 @@ class _AccountViewState extends State<AccountView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Account')),
+      appBar: AppBar(title: const Text('Settings')),
       body: AnimatedBuilder(
         animation: _accountController,
         builder: (context, _) {
@@ -129,7 +130,8 @@ class _AccountViewState extends State<AccountView> {
               ListTile(title: const Text('Email'), subtitle: Text(user.email)),
               ListTile(title: const Text('Phone'), subtitle: Text(user.phone)),
               const SizedBox(height: 16),
-              FilledButton.tonal(
+              FilledButton(
+                style: AppButtonStyles.filledButtonStyle,
                 onPressed: _accountController.isLoading ? null : _logout,
                 child: const Text('Logout'),
               ),

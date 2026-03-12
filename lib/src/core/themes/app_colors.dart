@@ -60,7 +60,7 @@ class AppColors {
   final Color buttonContentColor;
   final Color unselectedTileColor = Color.fromARGB(255, 225, 244, 254);
   Color activeButtonColor = _primaryColor;
-  final Color bottomNavigationBarColor = const Color.fromARGB(255, 255, 255, 255);
+  final Color bottomNavigationBarColor;
   final Color unselectedLabelColor = Color.fromARGB(255, 89, 89, 89);
   final Color activeButtonContentColor;
   final Color inActiveButtonColor;
@@ -99,7 +99,8 @@ class AppColors {
       popupContentColor = Colors.black,
       shadowColor = const Color(0x1F000000),
       errorColor = Colors.red,
-      tabBarColor = Colors.white;
+      tabBarColor = Colors.white,
+      bottomNavigationBarColor = const Color.fromARGB(255, 209, 194, 185);
 
   AppColors._internalDark()
     : textColor = Colors.white,
@@ -120,7 +121,8 @@ class AppColors {
       popupBackgroundColor = Colors.black,
       popupContentColor = Colors.white,
       shadowColor = const Color.fromARGB(146, 124, 123, 123),
-      tabBarColor = Colors.black;
+      tabBarColor = Colors.black,
+      bottomNavigationBarColor = const Color.fromARGB(255, 81, 60, 49);
 
   
 }

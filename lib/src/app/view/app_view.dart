@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tag_app/src/core/themes/app_colors.dart';
 import 'package:tag_app/src/feature/post/presentation/views/post_view.dart';
 
 import '../../di/repo_di.dart';
-import '../../feature/auth/presentation/views/account_view.dart';
+import 'settings/account_view.dart';
 import 'home/home_view.dart';
 
 class AppView extends StatefulWidget {
@@ -40,6 +41,7 @@ class _AppViewState extends State<AppView> {
             ),
           ),
           bottomNavigationBar: NavigationBar(
+            indicatorColor: AppColors.context(context).primaryColor,
             selectedIndex: selectedIndex,
             onDestinationSelected: (value) => _index.value = value,
             destinations: const [
