@@ -44,7 +44,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     _categoryPagination = InfinityScrollPaginationController<String, Category>(
       maxCapacityCount: 10000,
       onDemandPageCall: ({required onDemandPage}) async {
-        final res = await serviceLocator<GetCategoriesUseCase>().call();
+        final res = await serviceLocator<GetCategoriesUseCase>().call(
+          const GetCategoriesParams(),
+        );
         debugPrint("category pagination response from usecase: ${res.runtimeType}");
         return res.toCategoryPaginationResponse(onDemandPage: onDemandPage);
       },
