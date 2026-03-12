@@ -44,8 +44,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     _categoryPagination = InfinityScrollPaginationController<String, Category>(
       maxCapacityCount: 10000,
       onDemandPageCall: ({required onDemandPage}) async {
-        final res =
-            await serviceLocator<GetCategoriesUseCase>().call();
+        final res = await serviceLocator<GetCategoriesUseCase>().call();
+        debugPrint("category pagination response from usecase: ${res.runtimeType}");
         return res.toCategoryPaginationResponse(onDemandPage: onDemandPage);
       },
     );
@@ -54,6 +54,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   _decideProductTabSetup() {
+    debugPrint("State of category pagination: ${_categoryPagination.state.value}");
     if (_categoryPagination.state.value == PaginationLoadState.loaded) {
       _setTabController();
     } else if (_categoryPagination.state.value == PaginationLoadState.error) {
@@ -65,7 +66,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   _setTabController() {
     _tapProductsPaginations["*For You"] =
         InfinityScrollPaginationController<String, Product>(
-          maxCapacityCount: 100,
+          maxCapacityCount: 1000,
           onDemandPageCall: ({required onDemandPage}) async {
             final res =
                 await serviceLocator<GetProductsUseCase>().call(
@@ -79,23 +80,23 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           },
         );
 
-    for (int index = 0; index < _categoryPagination.length; index++) {
-      final category = _categoryPagination.itemAt(index);
-      if (category == null) continue;
-      _tapProductsPaginations[category.id] = InfinityScrollPaginationController<String, Product>(
-        maxCapacityCount: 100,
-        onDemandPageCall: ({required onDemandPage}) async {
-          final res = await serviceLocator<GetProductsUseCase>().call(
-            ProductQueryParams(
-              categoryId: category.id,
-              page: onDemandPage.pageNo,
-              limit: onDemandPage.limit,
-            ),
-          );
-          return res.toProductPaginationResponse(onDemandPage: onDemandPage);
-        },
-      );
-    }
+    // for (int index = 0; index < _categoryPagination.length; index++) {
+    //   final category = _categoryPagination.itemAt(index);
+    //   if (category == null) continue;
+    //   _tapProductsPaginations[category.id] = InfinityScrollPaginationController<String, Product>(
+    //     maxCapacityCount: 100,
+    //     onDemandPageCall: ({required onDemandPage}) async {
+    //       final res = await serviceLocator<GetProductsUseCase>().call(
+    //         ProductQueryParams(
+    //           categoryId: category.id,
+    //           page: onDemandPage.pageNo,
+    //           limit: onDemandPage.limit,
+    //         ),
+    //       );
+    //       return res.toProductPaginationResponse(onDemandPage: onDemandPage);
+    //     },
+    //   );
+    // }
 
     // Initialize the TabController after setting up the paginations for all tabs
     _tabController = TabController(
@@ -129,6 +130,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     return ListenableBuilder(
       listenable: _categoryPagination,
       builder: (context, child) {
+        debugPrint("State of category pagination buider: ${_categoryPagination.state.value}");
         bool isLoading =
             _categoryPagination.state.value == PaginationLoadState.refreshing ||
             (_categoryPagination.state.value == PaginationLoadState.loading &&
@@ -146,7 +148,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(_error!),
+                  Text(_categoryPagination.lastError?.message ?? 'Failed to load categories. Please try reloading the page!'),
                   const SizedBox(height: 8),
                   TextButton(
                     onPressed: () => _categoryPagination.refresh(),

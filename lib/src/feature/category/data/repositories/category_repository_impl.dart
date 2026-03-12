@@ -13,9 +13,11 @@ class CategoryRepositoryImpl with ErrorHandler implements CategoryRepository  {
 
   @override
   AsyncRequest<List<Category>> getCategories({bool onlyActive = true}) async {
-    final all = await _derivedCategories();
-    final filtered = onlyActive ? all.where((e) => e.isActive).toList() : all;
-    return SuccessResponse<List<Category>>(data: filtered);
+    return await asyncTryCatch(tryFunc: () async {
+      final all = await _derivedCategories();
+      final filtered = onlyActive ? all.where((e) => e.isActive).toList() : all;
+      return SuccessResponse<List<Category>>(data: filtered);
+    });
   }
 
   @override
@@ -49,9 +51,7 @@ class CategoryRepositoryImpl with ErrorHandler implements CategoryRepository  {
   }
 
   Future<List<Category>> _derivedCategories() async {
-    return asyncTryCatch<List<Category>>(
-      tryFunc: () async {
-        final res = await appPigeon.get(ApiEndpoints.getProducts);
+    final res = await appPigeon.get(ApiEndpoints.getProducts);
         final products = _extractProductList(res);
         final names = <String>{};
 
@@ -73,13 +73,7 @@ class CategoryRepositoryImpl with ErrorHandler implements CategoryRepository  {
                 )
                 .toList()
               ..sort((a, b) => a.name.compareTo(b.name));
-        return SuccessResponse<List<Category>>(data: categories);
-      },
-    ).then(
-      (res) => (res is SuccessResponse<List<Category>> && res.data != null)
-          ? res.data!
-          : <Category>[],
-    );
+        return categories;
   }
 
   List<dynamic> _extractProductList(Response<dynamic> response) {
