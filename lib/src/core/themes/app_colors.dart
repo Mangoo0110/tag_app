@@ -109,7 +109,7 @@ class AppColors {
       backgroundColor = Color.fromARGB(255, 17, 22, 31),//Colors.black,
       tileColor = const Color.fromARGB(255, 93, 54, 41),
       softGrey = const Color.fromARGB(255, 67, 66, 66),
-      iconColor = Color(0xFF0F0F79),
+      iconColor = Color.fromARGB(255, 121, 54, 15),
       buttonContentColor = Colors.black,
       activeButtonContentColor = Colors.white,
       inActiveButtonContentColor = Colors.grey.shade500,
