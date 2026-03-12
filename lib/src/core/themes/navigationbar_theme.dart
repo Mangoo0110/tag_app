@@ -3,7 +3,7 @@ part of 'themes.dart';
 class DNavigationBarTheme {
   DNavigationBarTheme._();
 
-  static NavigationBarThemeData lightNavigationBarTheme = NavigationBarThemeData(
+  static NavigationBarThemeData light = NavigationBarThemeData(
     backgroundColor: AppColors.light().bottomNavigationBarColor,
     indicatorColor: AppColors.light().primaryColor,
     elevation: 8,
@@ -37,7 +37,7 @@ class DNavigationBarTheme {
     ),
   );
 
-  static NavigationBarThemeData darkNavigationBarTheme = NavigationBarThemeData(
+  static NavigationBarThemeData dark = NavigationBarThemeData(
     backgroundColor: Colors.black,
     elevation: 8,
     shadowColor: AppColors.dark().shadowColor,

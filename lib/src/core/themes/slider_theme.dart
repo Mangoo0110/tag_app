@@ -1,6 +1,6 @@
 part of 'themes.dart';
 class AppSliderTheme {
-  static SliderThemeData get lightTheme => SliderThemeData(
+  static SliderThemeData get light => SliderThemeData(
     thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
     trackHeight: 5,
     thumbColor: AppColors.light().primaryColor,
@@ -8,7 +8,7 @@ class AppSliderTheme {
     inactiveTrackColor: AppColors.light().primaryColor.withAlpha(31),
   );
 
-  static SliderThemeData get darkTheme => SliderThemeData(
+  static SliderThemeData get dark => SliderThemeData(
     thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
     trackHeight: 5,
     thumbColor: AppColors.dark().primaryColor,

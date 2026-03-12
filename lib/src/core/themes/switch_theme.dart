@@ -1,7 +1,7 @@
 part of 'themes.dart';
 
 class SwitchThemes {
-  static SwitchThemeData lightSwitchTheme = SwitchThemeData(
+  static SwitchThemeData light = SwitchThemeData(
     thumbColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
         return AppColors.light().primaryColor; // Thumb color when selected
@@ -22,7 +22,7 @@ class SwitchThemes {
     }),
   );
 
-  static SwitchThemeData darkSwitchTheme = SwitchThemeData(
+  static SwitchThemeData dark = SwitchThemeData(
     thumbColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
         return AppColors.dark().primaryColor; // Thumb color when selected

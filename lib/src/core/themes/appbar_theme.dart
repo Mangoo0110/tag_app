@@ -5,7 +5,7 @@ class DAppBarTheme {
   DAppBarTheme._(); // Private constructor
 
   // Light AppBarTheme
-  static AppBarTheme lightAppBarTheme = AppBarTheme(
+  static AppBarTheme light = AppBarTheme(
     backgroundColor: AppColors.light().backgroundColor,
     //foregroundColor: AppColors.light().primaryColor,
     surfaceTintColor: AppColors.light().backgroundColor,//AppColors.light().backgroundColor,
@@ -30,7 +30,7 @@ class DAppBarTheme {
   );
 
   // Dark AppBarTheme
-  static AppBarTheme darkAppBarTheme = AppBarTheme(
+  static AppBarTheme dark = AppBarTheme(
     backgroundColor: AppColors.dark().backgroundColor,
     //foregroundColor: AppColors.dark().primaryColor,
     surfaceTintColor: AppColors.dark().backgroundColor,//AppColors.dark().backgroundColor,
@@ -55,6 +55,6 @@ class DAppBarTheme {
   );
 
   static AppBarTheme getAppBarTheme(Brightness brightness) {
-    return brightness == Brightness.light ? lightAppBarTheme : darkAppBarTheme;
+    return brightness == Brightness.light ? light : dark;
   }
 }

@@ -4,7 +4,7 @@ class DBottomSheetTheme {
   DBottomSheetTheme._(); // Private constructor
 
   // Light BottomSheetThemeData
-  static BottomSheetThemeData lightBottomSheetTheme = BottomSheetThemeData(
+  static BottomSheetThemeData light = BottomSheetThemeData(
     backgroundColor: AppColors.light().backgroundColor,
     modalBackgroundColor: AppColors.light().backgroundColor,
     elevation: 16,
@@ -14,7 +14,7 @@ class DBottomSheetTheme {
   );
 
   // Dark BottomSheetThemeData
-  static BottomSheetThemeData darkBottomSheetTheme = BottomSheetThemeData(
+  static BottomSheetThemeData dark = BottomSheetThemeData(
     backgroundColor: AppColors.dark().backgroundColor,
     modalBackgroundColor: AppColors.dark().backgroundColor,
     elevation: 16,

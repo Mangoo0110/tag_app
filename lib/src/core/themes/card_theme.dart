@@ -4,7 +4,7 @@ class DCardTheme {
   DCardTheme._(); // Private constructor
 
   // Light CardTheme
-  static CardThemeData lightCardTheme = CardThemeData(
+  static CardThemeData light = CardThemeData(
     color: AppColors.light().tileColor, // Background color of the card
     //shadowColor: Colors.black.withOpacity(0.2), // Color of the shadow
     elevation: 4, // Elevation of the card
@@ -17,7 +17,7 @@ class DCardTheme {
   );
 
   // Dark CardTheme
-  static CardThemeData darkCardTheme = CardThemeData(
+  static CardThemeData dark = CardThemeData(
     color: AppColors.dark().invertTextColor,
     //shadowColor: Colors.white.withOpacity(0.4), // Color of the shadow
     elevation: 4, // Elevation of the card

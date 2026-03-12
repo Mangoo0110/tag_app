@@ -4,7 +4,7 @@ class DCheckboxTheme {
   DCheckboxTheme._(); // Private constructor
 
   // Light CheckboxThemeData
-  static CheckboxThemeData lightCheckboxTheme = CheckboxThemeData(
+  static CheckboxThemeData light = CheckboxThemeData(
     fillColor: WidgetStatePropertyAll(AppColors.light().buttonColor),
     checkColor: WidgetStatePropertyAll(AppColors.light().textColor),
     splashRadius: 20,
@@ -14,7 +14,7 @@ class DCheckboxTheme {
   );
 
   // Dark CheckboxThemeData
-  static CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
+  static CheckboxThemeData dark = CheckboxThemeData(
     fillColor: WidgetStatePropertyAll(AppColors.dark().buttonColor),
     checkColor: WidgetStatePropertyAll(AppColors.dark().textColor),
     splashRadius: 20,

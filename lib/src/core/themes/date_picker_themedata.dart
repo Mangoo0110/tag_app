@@ -1,7 +1,7 @@
 part of 'themes.dart';
 
 class DatePickerThemes {
-  static final lightTheme = DatePickerThemeData(
+  static final light = DatePickerThemeData(
     backgroundColor: AppColors.light().backgroundColor,
     headerBackgroundColor: AppColors.light().primaryColor,
     headerForegroundColor: Colors.black,
@@ -67,7 +67,7 @@ class DatePickerThemes {
     )
   );
 
-  static final darkTheme = DatePickerThemeData(
+  static final dark = DatePickerThemeData(
     backgroundColor: AppColors.dark().backgroundColor,
     headerBackgroundColor: AppColors.dark().primaryColor,
     headerForegroundColor: Colors.white,

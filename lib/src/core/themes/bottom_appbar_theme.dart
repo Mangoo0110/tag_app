@@ -5,7 +5,7 @@ class DBottomAppBarTheme {
 
   // Light BottomAppBarThemeData
   
-  static BottomAppBarThemeData lightBottomAppBarTheme = BottomAppBarThemeData(
+  static BottomAppBarThemeData light = BottomAppBarThemeData(
     color: AppColors.light().backgroundColor,
     elevation: 8,
     shadowColor: AppColors.light().backgroundColor,
@@ -13,7 +13,7 @@ class DBottomAppBarTheme {
   );
 
   // Dark BottomAppBarThemeData
-  static BottomAppBarThemeData darkBottomAppBarTheme = BottomAppBarThemeData(
+  static BottomAppBarThemeData dark = BottomAppBarThemeData(
     color: AppColors.dark().dividerColor,
     elevation: 8,
     shadowColor: AppColors.dark().dividerColor,

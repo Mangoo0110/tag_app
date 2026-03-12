@@ -4,7 +4,7 @@ class DBottomNavigationBarThemes {
   DBottomNavigationBarThemes._(); // Private constructor
 
   // Light BottomNavigationBarTheme
-  static BottomNavigationBarThemeData lightBottomNavTheme = BottomNavigationBarThemeData(
+  static BottomNavigationBarThemeData light = BottomNavigationBarThemeData(
     backgroundColor: AppColors.light().bottomNavigationBarColor,
     selectedItemColor: AppColors.light().primaryColor,
     unselectedItemColor: Colors.black87,
@@ -35,7 +35,7 @@ class DBottomNavigationBarThemes {
   );
 
   // Dark BottomNavigationBarTheme
-  static BottomNavigationBarThemeData darkBottomNavTheme = BottomNavigationBarThemeData(
+  static BottomNavigationBarThemeData dark = BottomNavigationBarThemeData(
     backgroundColor: AppColors.dark().bottomNavigationBarColor, // Background color for the bottom navigation bar
     selectedItemColor: AppColors.dark().primaryColor, // Color of the selected item
     unselectedItemColor: AppColors.dark().invertTextColor, // Color of unselected items
