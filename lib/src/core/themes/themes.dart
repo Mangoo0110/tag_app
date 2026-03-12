@@ -18,6 +18,7 @@ part 'checkbox_theme.dart';
 part 'divider_theme.dart';
 part 'icon_theme.dart';
 part 'input_decoration_theme.dart';
+part 'navigationbar_theme.dart';
 part 'switch_theme.dart';
 part 'tabbar_theme.dart';
 part 'text_theme.dart';
@@ -67,8 +68,9 @@ class AppTheme {
       buttonTheme: DButtonTheme.lightButtonTheme,
       bottomSheetTheme: DBottomSheetTheme.lightBottomSheetTheme,
       checkboxTheme: DCheckboxTheme.lightCheckboxTheme,
-      //cardTheme: DCardTheme.lightCardTheme,
+      cardTheme: DCardTheme.lightCardTheme,
       bottomNavigationBarTheme: DBottomNavigationBarThemes.lightBottomNavTheme,
+      navigationBarTheme: DNavigationBarTheme.lightNavigationBarTheme,
       tabBarTheme: DTabBarTheme.lightTabBarTheme,
       listTileTheme: ListTileThemeData(
         selectedTileColor: AppColors.light().splashColor,
@@ -123,14 +125,15 @@ class AppTheme {
       buttonTheme: DButtonTheme.darkButtonTheme,
       bottomSheetTheme: DBottomSheetTheme.darkBottomSheetTheme,
       checkboxTheme: DCheckboxTheme.darkCheckboxTheme,
-     // cardTheme: DCardTheme.darkCardTheme,
+      cardTheme: DCardTheme.darkCardTheme,
       tabBarTheme: DTabBarTheme.darkTabBarTheme,
       bottomNavigationBarTheme: DBottomNavigationBarThemes.darkBottomNavTheme,
       dividerTheme: DDividerTheme.darkDividerTheme,
       progressIndicatorTheme: ProgressIndicatorThemes.dark,
       datePickerTheme: DatePickerThemes.darkTheme,
       elevatedButtonTheme: ElevatedButtonThemes.dark,
-      sliderTheme: AppSliderTheme.darkTheme
+      sliderTheme: AppSliderTheme.darkTheme,
+      navigationBarTheme: DNavigationBarTheme.darkNavigationBarTheme,
     );
   }
 }

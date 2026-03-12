@@ -129,7 +129,7 @@ class ProductCard2 extends StatelessWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary
+                                color: Theme.of(context).primaryColor
                                     .withValues(alpha: 0.08),
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -137,7 +137,7 @@ class ProductCard2 extends StatelessWidget {
                                 tag,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),

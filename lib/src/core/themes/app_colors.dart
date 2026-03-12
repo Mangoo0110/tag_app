@@ -84,10 +84,10 @@ class AppColors {
     : textColor = Colors.black,
       invertTextColor = Colors.white,
       grey = Color.fromARGB(255, 216, 216, 216),
-      tileColor = Color(0xFFB0E0CF),
+      tileColor = Color.fromARGB(255, 239, 239, 239),
       softGrey = Color.fromARGB(255, 233, 233, 233),
       backgroundColor = Colors.white,
-      iconColor = Color(0xFF0F0F79),
+      iconColor = Color.fromARGB(255, 121, 54, 15),
       buttonContentColor = Colors.white,
       activeButtonContentColor = Colors.white,
       inActiveButtonContentColor = Colors.grey.shade200,
@@ -100,14 +100,14 @@ class AppColors {
       shadowColor = const Color(0x1F000000),
       errorColor = Colors.red,
       tabBarColor = Colors.white,
-      bottomNavigationBarColor = const Color.fromARGB(255, 209, 194, 185);
+      bottomNavigationBarColor = const Color.fromARGB(255, 239, 238, 236);
 
   AppColors._internalDark()
     : textColor = Colors.white,
       invertTextColor = Colors.black,
       grey = Colors.grey,
       backgroundColor = Color.fromARGB(255, 17, 22, 31),//Colors.black,
-      tileColor = Colors.grey.shade900,
+      tileColor = const Color.fromARGB(255, 93, 54, 41),
       softGrey = const Color.fromARGB(255, 67, 66, 66),
       iconColor = Color(0xFF0F0F79),
       buttonContentColor = Colors.black,
@@ -120,7 +120,7 @@ class AppColors {
       errorColor = Colors.red,
       popupBackgroundColor = Colors.black,
       popupContentColor = Colors.white,
-      shadowColor = const Color.fromARGB(146, 124, 123, 123),
+      shadowColor = Colors.white,
       tabBarColor = Colors.black,
       bottomNavigationBarColor = const Color.fromARGB(255, 81, 60, 49);
 

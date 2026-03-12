@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tag_app/src/core/themes/app_colors.dart';
 import 'package:tag_app/src/feature/post/presentation/views/post_view.dart';
-
-import '../../di/repo_di.dart';
 import 'settings/account_view.dart';
 import 'home/home_view.dart';
 
@@ -41,8 +39,8 @@ class _AppViewState extends State<AppView> {
             ),
           ),
           bottomNavigationBar: NavigationBar(
-            indicatorColor: AppColors.context(context).primaryColor,
             selectedIndex: selectedIndex,
+            elevation: 8,
             onDestinationSelected: (value) => _index.value = value,
             destinations: const [
               NavigationDestination(
