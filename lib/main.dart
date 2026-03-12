@@ -12,12 +12,16 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   runZonedGuarded(() async {
+    
     WidgetsFlutterBinding.ensureInitialized();
     final path = await getApplicationCacheDirectory();
     Hive.init(path.path);
+
     initDependency();
+
     await HiveService().openBox(HiveBox.settings);
     await AppManager().loadThemePreference();
+
     runApp(const MyApp());
   }, (error, stack) {
     FlutterError.reportError(
