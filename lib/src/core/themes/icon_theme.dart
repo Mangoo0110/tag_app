@@ -4,7 +4,7 @@ class DIconTheme {
   DIconTheme._(); // Private constructor
 
   // Light IconThemeData
-  static IconThemeData lightIconTheme = IconThemeData(
+  static IconThemeData light = IconThemeData(
     color: AppColors.light().iconColor, // Color of the icon
     size: 24, // Size of the icon
     opacity: 1.0, // Opacity of the icon
@@ -18,7 +18,7 @@ class DIconTheme {
   );
 
   // Dark IconThemeData
-  static IconThemeData darkIconTheme = IconThemeData(
+  static IconThemeData dark = IconThemeData(
     color: AppColors.dark().iconColor, // Color of the icon
     size: 24, // Size of the icon
     opacity: 1.0, // Opacity of the icon

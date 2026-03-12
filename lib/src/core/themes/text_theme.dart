@@ -4,7 +4,7 @@ class DTextTheme {
   DTextTheme._();
 
   // Light Theme Text Styles
-  static TextTheme lightTextTheme = TextTheme(
+  static TextTheme light = TextTheme(
     displayLarge: const TextStyle(
       fontFamily: 'Public Sans',
     ).copyWith(
@@ -128,7 +128,7 @@ class DTextTheme {
   );
 
   // Dark Theme Text Styles
-  static TextTheme get darkTextTheme => TextTheme(
+  static TextTheme get dark => TextTheme(
     displayLarge: const TextStyle(
       fontFamily: 'Public Sans',
     ).copyWith(

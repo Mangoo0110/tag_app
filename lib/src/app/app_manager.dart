@@ -38,8 +38,6 @@ class AppManager {
   }
 
   void initialize() async{
-    //  currentAuth.value = await serviceLocator<AuthRepo>().currentUser();
-    //  _onAuthChange(currentAuth.value);
     // Initialization code here
     authServiceLocatior<AuthorizedPigeon>().authStream.listen(
       _onAuthChange,

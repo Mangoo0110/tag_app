@@ -4,7 +4,7 @@ class DInputDecorationTheme {
   DInputDecorationTheme._(); // Private constructor
 
   // Light InputDecorationTheme
-  static InputDecorationTheme lightTheme = InputDecorationTheme(
+  static InputDecorationTheme light = InputDecorationTheme(
     //filled: true,
     //contentPadding: const EdgeInsets.only(left: 4, right: 4),
     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -41,7 +41,7 @@ class DInputDecorationTheme {
   );
 
   // Dark InputDecorationTheme 
-  static InputDecorationTheme darkTheme = InputDecorationTheme(
+  static InputDecorationTheme dark = InputDecorationTheme(
     //filled: true,
     //contentPadding: const EdgeInsets.only(left: 4, right: 4),
     floatingLabelBehavior: FloatingLabelBehavior.never,

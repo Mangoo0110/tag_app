@@ -27,8 +27,6 @@ class AppRouter {
   }
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    debugPrint('onGenerateRoute: ${settings.name}');
-
     if (settings.name == RouteNames.login.path) {
       return MaterialPageRoute(
         builder: (context) => const LoginView(),

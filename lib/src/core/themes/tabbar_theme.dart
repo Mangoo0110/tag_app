@@ -4,7 +4,7 @@ class DTabBarTheme {
   DTabBarTheme._(); // Private constructor
 
   // Light TabBarTheme
-  static TabBarThemeData lightTabBarTheme = TabBarThemeData(
+  static TabBarThemeData light = TabBarThemeData(
     indicatorSize: TabBarIndicatorSize.label,
     dividerColor: AppColors.light().bottomNavigationBarColor,
     indicator: BoxDecoration(
@@ -18,7 +18,7 @@ class DTabBarTheme {
   );
 
   // Dark TabBarTheme
-  static TabBarThemeData darkTabBarTheme = TabBarThemeData(
+  static TabBarThemeData dark = TabBarThemeData(
     indicatorSize: TabBarIndicatorSize.label,
     indicator: BoxDecoration(
       color: AppColors.dark().backgroundColor,

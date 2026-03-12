@@ -1,11 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tag_app/src/app/app_manager.dart';
 import 'package:tag_app/src/app/routing/app_router.dart';
-import 'package:tag_app/src/di/auth_di.dart';
-import 'package:tag_app/src/feature/post/post_di.dart';
-import 'package:tag_app/src/feature/post/presentation/views/post_view.dart';
 import 'package:tag_app/src/core/local_db/hive_db.dart';
 import 'src/di/repo_di.dart';
 import 'src/core/themes/themes.dart';
@@ -13,14 +11,23 @@ import 'src/core/themes/themes.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final path = await getApplicationCacheDirectory();
-  Hive.init(path.path);
-  initDependency();
-  await HiveService().openBox(HiveBox.settings);
-  await AppManager().loadThemePreference();
-  
-  runApp(const MyApp());
+  runZonedGuarded(() async {
+    
+    WidgetsFlutterBinding.ensureInitialized();
+    final path = await getApplicationCacheDirectory();
+    Hive.init(path.path);
+
+    initDependency();
+
+    await HiveService().openBox(HiveBox.settings);
+    await AppManager().loadThemePreference();
+
+    runApp(const MyApp());
+  }, (error, stack) {
+    FlutterError.reportError(
+      FlutterErrorDetails(exception: error, stack: stack),
+    );
+  });
 }
 
 class MyApp extends StatefulWidget {

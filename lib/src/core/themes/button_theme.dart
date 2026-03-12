@@ -4,7 +4,7 @@ class DButtonTheme {
   DButtonTheme._(); // Private constructor
 
   // Light ButtonThemeData
-  static ButtonThemeData lightButtonTheme = ButtonThemeData(
+  static ButtonThemeData light = ButtonThemeData(
     buttonColor: AppColors.light().buttonColor,
     textTheme: ButtonTextTheme.primary,
     shape: RoundedRectangleBorder(
@@ -22,7 +22,7 @@ class DButtonTheme {
   );
 
   // Dark ButtonThemeData
-  static ButtonThemeData darkButtonTheme = ButtonThemeData(
+  static ButtonThemeData dark = ButtonThemeData(
     buttonColor: AppColors.dark().buttonColor,
     textTheme: ButtonTextTheme.primary,
     shape: RoundedRectangleBorder(

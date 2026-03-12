@@ -18,6 +18,7 @@ part 'checkbox_theme.dart';
 part 'divider_theme.dart';
 part 'icon_theme.dart';
 part 'input_decoration_theme.dart';
+part 'navigationbar_theme.dart';
 part 'switch_theme.dart';
 part 'tabbar_theme.dart';
 part 'text_theme.dart';
@@ -29,7 +30,7 @@ class AppTheme {
   ThemeData get lightTheme {
     return ThemeData(
       primaryColor: AppColors.light().primaryColor,
-      primaryTextTheme: DTextTheme.lightTextTheme,
+      primaryTextTheme: DTextTheme.light,
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.light().primaryColor,
@@ -57,30 +58,30 @@ class AppTheme {
         outlineVariant: AppColors.light().dividerColor,
       ),
       scaffoldBackgroundColor: AppColors.light().backgroundColor,
-      textTheme: DTextTheme.lightTextTheme,
-      textSelectionTheme: DTextSelectionTheme.lightTextSelectionTheme,
-      switchTheme: SwitchThemes.lightSwitchTheme,
-      appBarTheme: DAppBarTheme.lightAppBarTheme,
-      bottomAppBarTheme: DBottomAppBarTheme.lightBottomAppBarTheme,
-      inputDecorationTheme: DInputDecorationTheme.lightTheme,
-      iconTheme: DIconTheme.lightIconTheme,
-      buttonTheme: DButtonTheme.lightButtonTheme,
-      bottomSheetTheme: DBottomSheetTheme.lightBottomSheetTheme,
-      checkboxTheme: DCheckboxTheme.lightCheckboxTheme,
-      //cardTheme: DCardTheme.lightCardTheme,
-      bottomNavigationBarTheme: DBottomNavigationBarThemes.lightBottomNavTheme,
-      tabBarTheme: DTabBarTheme.lightTabBarTheme,
+      textTheme: DTextTheme.light,
+      textSelectionTheme: DTextSelectionTheme.light,
+      switchTheme: SwitchThemes.light,
+      appBarTheme: DAppBarTheme.light,
+      bottomAppBarTheme: DBottomAppBarTheme.light,
+      inputDecorationTheme: DInputDecorationTheme.light,
+      iconTheme: DIconTheme.light,
+      buttonTheme: DButtonTheme.light,
+      bottomSheetTheme: DBottomSheetTheme.light,
+      checkboxTheme: DCheckboxTheme.light,
+      cardTheme: DCardTheme.light,
+      bottomNavigationBarTheme: DBottomNavigationBarThemes.light,
+      navigationBarTheme: DNavigationBarTheme.light,
+      tabBarTheme: DTabBarTheme.light,
       listTileTheme: ListTileThemeData(
         selectedTileColor: AppColors.light().splashColor,
         
       ),
-      indicatorColor: AppColors.light().backgroundColor,
-      dividerTheme: DDividerTheme.lightDividerTheme,
+      dividerTheme: DDividerTheme.light,
       progressIndicatorTheme: ProgressIndicatorThemes.light,
-      datePickerTheme: DatePickerThemes.lightTheme,
+      datePickerTheme: DatePickerThemes.light,
       elevatedButtonTheme: ElevatedButtonThemes.light,
-      floatingActionButtonTheme: FloatingActionButtonThemes.lightTheme,
-      sliderTheme: AppSliderTheme.lightTheme
+      floatingActionButtonTheme: FloatingActionButtonThemes.light,
+      sliderTheme: AppSliderTheme.light
     );
   }
 
@@ -92,7 +93,7 @@ class AppTheme {
           foregroundColor: AppColors.dark().primaryColor,
         ),
       ),
-      primaryTextTheme: DTextTheme.darkTextTheme,
+      primaryTextTheme: DTextTheme.dark,
       primaryColorLight: AppColors.dark().primaryColor.withAlpha(100),
       primaryColorDark: AppColors.dark().primaryColor,
       splashColor: AppColors.dark().splashColor,
@@ -113,24 +114,25 @@ class AppTheme {
         outlineVariant: AppColors.dark().dividerColor,
       ),
       scaffoldBackgroundColor: AppColors.dark().backgroundColor,
-      textTheme: DTextTheme.darkTextTheme,
-      switchTheme: SwitchThemes.darkSwitchTheme,
-      appBarTheme: DAppBarTheme.darkAppBarTheme,
-      bottomAppBarTheme: DBottomAppBarTheme.darkBottomAppBarTheme,
-      inputDecorationTheme: DInputDecorationTheme.darkTheme,
-      iconTheme: DIconTheme.darkIconTheme,
-      textSelectionTheme: DTextSelectionTheme.darkTextSelectionTheme,
-      buttonTheme: DButtonTheme.darkButtonTheme,
-      bottomSheetTheme: DBottomSheetTheme.darkBottomSheetTheme,
-      checkboxTheme: DCheckboxTheme.darkCheckboxTheme,
-     // cardTheme: DCardTheme.darkCardTheme,
-      tabBarTheme: DTabBarTheme.darkTabBarTheme,
-      bottomNavigationBarTheme: DBottomNavigationBarThemes.darkBottomNavTheme,
-      dividerTheme: DDividerTheme.darkDividerTheme,
+      textTheme: DTextTheme.dark,
+      switchTheme: SwitchThemes.dark,
+      appBarTheme: DAppBarTheme.dark,
+      bottomAppBarTheme: DBottomAppBarTheme.dark,
+      inputDecorationTheme: DInputDecorationTheme.dark,
+      iconTheme: DIconTheme.dark,
+      textSelectionTheme: DTextSelectionTheme.dark,
+      buttonTheme: DButtonTheme.dark,
+      bottomSheetTheme: DBottomSheetTheme.dark,
+      checkboxTheme: DCheckboxTheme.dark,
+      cardTheme: DCardTheme.dark,
+      tabBarTheme: DTabBarTheme.dark,
+      bottomNavigationBarTheme: DBottomNavigationBarThemes.dark,
+      dividerTheme: DDividerTheme.dark,
       progressIndicatorTheme: ProgressIndicatorThemes.dark,
-      datePickerTheme: DatePickerThemes.darkTheme,
+      datePickerTheme: DatePickerThemes.dark,
       elevatedButtonTheme: ElevatedButtonThemes.dark,
-      sliderTheme: AppSliderTheme.darkTheme
+      sliderTheme: AppSliderTheme.dark,
+      navigationBarTheme: DNavigationBarTheme.dark,
     );
   }
 }

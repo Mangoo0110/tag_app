@@ -1,7 +1,7 @@
 part of 'themes.dart';
 
 class FloatingActionButtonThemes {
-  static FloatingActionButtonThemeData lightTheme = FloatingActionButtonThemeData(
+  static FloatingActionButtonThemeData light = FloatingActionButtonThemeData(
     backgroundColor: AppColors.light().primaryColor,
     shape: CircleBorder(),
     elevation: 6.0,

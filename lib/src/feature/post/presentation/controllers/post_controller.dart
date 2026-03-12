@@ -14,8 +14,10 @@ final class PostController extends ChangeNotifier {
         maxCapacityCount: 500,
         onDemandPageCall: ({required onDemandPage}) async {
           final res = await _getPosts(
-            page: onDemandPage.pageNo,
-            limit: onDemandPage.limit,
+            GetPostsParams(
+              page: onDemandPage.pageNo,
+              limit: onDemandPage.limit,
+            ),
           );
           return res.toPostPaginationResponse(onDemandPage: onDemandPage);
         },
