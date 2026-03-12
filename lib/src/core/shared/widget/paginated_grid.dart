@@ -196,7 +196,8 @@ class _PaginatedGridViewState<K, T> extends State<PaginatedGridView<K, T>> {
                             }
                             if (value == PaginationLoadState.error) {
                               return Column(
-                                mainAxisSize: MainAxisSize.min,
+                                //mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     widget.pagination.errorMessage ??
@@ -208,7 +209,7 @@ class _PaginatedGridViewState<K, T> extends State<PaginatedGridView<K, T>> {
                                   TextButton.icon(
                                     onPressed: widget.pagination.loadNextPage,
                                     icon: const Icon(Icons.refresh),
-                                    label: const Text('Retry loading'),
+                                    label: const Text('Retry'),
                                   ),
                                 ],
                               );

@@ -91,7 +91,7 @@ class _PaginatedListWidgetState<K, T> extends State<PaginatedListWidget<K, T>> {
                       children: [
                         Text(
                           widget.pagination.errorMessage ??
-                              'Failed to load items.',
+                              'Failed to load!',
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
@@ -191,6 +191,25 @@ class _PaginatedListWidgetState<K, T> extends State<PaginatedListWidget<K, T>> {
                                   ),
                                 ),
                               );
+                            }
+
+                            if(value == PaginationLoadState.error) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    widget.pagination.errorMessage ??
+                                        'Failed to load!',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  TextButton.icon(
+                                    onPressed: widget.pagination.loadNextPage,
+                                    icon: const Icon(Icons.refresh),
+                                    label: const Text('Retry'),
+                                  ),
+                                ],
+                              ).animate().fadeIn(duration: 300.ms);
                             }
                             return Container();
                           },
