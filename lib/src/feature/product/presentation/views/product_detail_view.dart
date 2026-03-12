@@ -49,7 +49,7 @@ class ProductDetailView extends StatelessWidget {
                 '৳${price.toStringAsFixed(2)}',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).primaryColor,
                     ),
               ),
               if (original != null) ...[
@@ -176,14 +176,14 @@ class _InfoChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),
+        color: Theme.of(context).primaryColor.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(999),
       ),
       child: Text(
         label,
         style: TextStyle(
           fontSize: 12,
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).primaryColor,
           fontWeight: FontWeight.w600,
         ),
       ),
