@@ -79,13 +79,15 @@ class _DarazRefreshIndicator extends StatelessWidget {
 class DarazIndicator extends Decoration {
   const DarazIndicator({
     required this.progress,
-    this.color = Colors.orange,
+    this.barColor = Colors.orange,
+    required this.bubbleColor,
     this.thickness = 3,
     this.horizontalInset = 8,
   });
 
   final double progress; // 0 => unpinned bubble, 1 => pinned underline
-  final Color color;
+  final Color barColor;
+  final Color bubbleColor;
   final double thickness;
   final double horizontalInset;
 
@@ -103,7 +105,7 @@ class _DarazIndicatorPainter extends BoxPainter {
   void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
     final size = cfg.size;
     if (size == null) return;
-
+    debugPrint("Progress: ${decoration.progress}, offset: $offset");
     final p = decoration.progress.clamp(0.0, 1.0);
 
     final leftX = offset.dx + decoration.horizontalInset;
@@ -143,7 +145,7 @@ class _DarazIndicatorPainter extends BoxPainter {
       );
 
     final bubblePaint = Paint()
-      ..color = Colors.white.withValues(alpha: 1.0 - p)
+      ..color = decoration.bubbleColor
       ..style = PaintingStyle.fill
       ..isAntiAlias = true;
 
@@ -154,7 +156,7 @@ class _DarazIndicatorPainter extends BoxPainter {
       ..lineTo(rightX - 2, lineY);
 
     final underlinePaint = Paint()
-      ..color = decoration.color.withValues(alpha: p)
+      ..color = decoration.barColor.withValues(alpha: p)
       ..style = PaintingStyle.stroke
       ..strokeWidth = lerpDouble(2.0, decoration.thickness, p)!
       ..strokeCap = StrokeCap.round

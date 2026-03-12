@@ -3,6 +3,7 @@ import 'package:tag_app/src/di/auth_di.dart';
 import 'package:tag_app/src/core/shared/reactive_notifier/snackbar_notifier.dart';
 import 'package:tag_app/src/feature/auth/presentation/controllers/account_controller.dart';
 import 'package:tag_app/src/feature/auth/presentation/views/login_view.dart';
+import 'package:tag_app/src/app/app_manager.dart';
 
 class AccountView extends StatefulWidget {
   const AccountView({super.key});
@@ -13,6 +14,7 @@ class AccountView extends StatefulWidget {
 
 class _AccountViewState extends State<AccountView> {
   late final AccountController _accountController;
+  final AppManager _appManager = AppManager();
 
   @override
   void initState() {
@@ -80,6 +82,27 @@ class _AccountViewState extends State<AccountView> {
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
+              ValueListenableBuilder<ThemeMode>(
+                valueListenable: _appManager.themeMode,
+                builder: (context, mode, _) {
+                  return SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Dark mode'),
+                    subtitle: Text(
+                      mode == ThemeMode.dark
+                          ? 'Enabled'
+                          : 'Disabled',
+                    ),
+                    value: mode == ThemeMode.dark,
+                    onChanged: (value) {
+                      _appManager.setThemeMode(
+                        value ? ThemeMode.dark : ThemeMode.light,
+                      );
+                    },
+                  );
+                },
+              ),
+              const Divider(),
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: Text(

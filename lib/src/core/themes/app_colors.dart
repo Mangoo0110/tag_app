@@ -83,7 +83,7 @@ class AppColors {
   AppColors._internalLight()
     : textColor = Colors.black,
       invertTextColor = Colors.white,
-      grey = Color.fromARGB(255, 162, 158, 158),
+      grey = Color.fromARGB(255, 216, 216, 216),
       tileColor = Color(0xFFB0E0CF),
       softGrey = Color.fromARGB(255, 233, 233, 233),
       backgroundColor = Colors.white,
@@ -107,7 +107,7 @@ class AppColors {
       grey = Colors.grey,
       backgroundColor = Color.fromARGB(255, 17, 22, 31),//Colors.black,
       tileColor = Colors.grey.shade900,
-      softGrey = Colors.grey.shade500,
+      softGrey = const Color.fromARGB(255, 67, 66, 66),
       iconColor = Color(0xFF0F0F79),
       buttonContentColor = Colors.black,
       activeButtonContentColor = Colors.white,

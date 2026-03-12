@@ -6,6 +6,7 @@ import 'package:pagination_pkg/pagination_pkg.dart';
 import 'package:tag_app/src/app/helpers/pagination_response_converter.dart';
 import 'package:tag_app/src/app/widget/search_input.dart';
 import 'package:tag_app/src/core/shared/widget/paginated_grid.dart';
+import 'package:tag_app/src/core/themes/app_colors.dart';
 import 'package:tag_app/src/feature/category/domain/entities/category.dart';
 import 'package:tag_app/src/feature/category/domain/usecases/get_categories_use_case.dart';
 
@@ -128,7 +129,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     return ListenableBuilder(
       listenable: _categoryPagination,
       builder: (context, child) {
-        debugPrint("State: ${_categoryPagination.state.value}");
         bool isLoading =
             _categoryPagination.state.value == PaginationLoadState.refreshing ||
             (_categoryPagination.state.value == PaginationLoadState.loading &&
@@ -140,8 +140,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           );
         }
 
-        if (_categoryPagination.state.value == PaginationLoadState.error &&
-            _categoryPagination.length == 0) {
+        if (_categoryPagination.state.value == PaginationLoadState.error) {
           return Scaffold(
             body: Center(
               child: Column(
@@ -290,13 +289,14 @@ class _AdaptiveTabBarHeader extends SliverPersistentHeaderDelegate {
       minExtent,
       maxExtent,
     );
-    final bg = Color.lerp(const Color(0xFFF2F2F2), Colors.white, progress)!;
-    final indicatorColor = Theme.of(context).colorScheme.primary;
+    final boxColor = Theme.of(context).brightness == Brightness.light ? Colors.grey.shade200 : Colors.black;
+    final bubbleColor = progress == 1 ? boxColor : Theme.of(context).colorScheme.surface;
+    final barColor = Theme.of(context).primaryColor;
 
     return SizedBox(
       height: currentHeight,
       child: ColoredBox(
-        color: bg,
+        color: boxColor,
         child: Align(
           alignment: Alignment.bottomLeft,
           child: TabBar(
@@ -312,13 +312,13 @@ class _AdaptiveTabBarHeader extends SliverPersistentHeaderDelegate {
               fontWeight: FontWeight.w500,
               fontSize: 12,
             ),
-            labelColor: indicatorColor,
             unselectedLabelColor: const Color(0xFF5F5F5F),
             indicatorPadding: EdgeInsets.zero,
             padding: EdgeInsets.zero,
             indicator: DarazIndicator(
               progress: progress,
-              color: indicatorColor,
+              barColor: barColor,
+              bubbleColor: bubbleColor,
               horizontalInset: 0,
             ),
             tabs: tabs

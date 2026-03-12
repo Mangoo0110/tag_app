@@ -1,7 +1,8 @@
 
 import 'package:app_pigeon/app_pigeon.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:tag_app/src/di/auth_di.dart';
+import 'package:tag_app/src/core/local_db/hive_db.dart';
 
 import '../../main.dart';
 import 'routing/route_names.dart';
@@ -16,6 +17,25 @@ class AppManager {
   bool get isGuestMode => _guestMode;
 
   ValueNotifier<AuthStatus?> currentAuth = ValueNotifier(null);
+  final ValueNotifier<ThemeMode> themeMode = ValueNotifier(ThemeMode.light);
+  static const String _themeKey = 'theme_mode';
+
+  Future<void> loadThemePreference() async {
+    await HiveService().openBox(HiveBox.settings);
+    final saved = HiveService().get<String>(HiveBox.settings, _themeKey);
+    if (saved == ThemeMode.dark.name) {
+      themeMode.value = ThemeMode.dark;
+    } else if (saved == ThemeMode.system.name) {
+      themeMode.value = ThemeMode.system;
+    } else {
+      themeMode.value = ThemeMode.light;
+    }
+  }
+
+  void setThemeMode(ThemeMode mode) {
+    themeMode.value = mode;
+    HiveService().put<String>(HiveBox.settings, _themeKey, mode.name);
+  }
 
   void initialize() async{
     //  currentAuth.value = await serviceLocator<AuthRepo>().currentUser();
