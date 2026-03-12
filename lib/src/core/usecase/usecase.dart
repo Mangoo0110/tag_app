@@ -2,11 +2,11 @@
 
 import 'package:async_handler/async_handler.dart';
 
-abstract interface class AsyncEitherUsecase<SuccessType, Params>{
+abstract interface class AsyncUsecase<SuccessType, Params>{
   AsyncRequest<SuccessType> call(Params params);
 }
 
-abstract interface class NormalUsecase<SuccessType, Params>{
+abstract interface class Usecase<SuccessType, Params>{
   SuccessType call(Params params);
 }
 
