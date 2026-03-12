@@ -3,6 +3,7 @@ import 'package:tag_app/src/di/auth_di.dart';
 import 'package:tag_app/src/core/shared/reactive_notifier/process_notifier.dart';
 import 'package:tag_app/src/core/shared/reactive_notifier/snackbar_notifier.dart';
 import 'package:tag_app/src/core/shared/reactive_notifier/widget/process_notifier_button.dart';
+import 'package:tag_app/src/di/repo_di.dart';
 import 'package:tag_app/src/feature/auth/presentation/controllers/login_controller.dart';
 
 class LoginView extends StatefulWidget {
@@ -16,12 +17,11 @@ class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController(text: 'emilys');
   final _passwordController = TextEditingController(text: 'emilyspass');
-  late final LoginController _loginController;
+  final LoginController _loginController = LoginController(serviceLocator());
 
   @override
   void initState() {
     super.initState();
-    _loginController = authServiceLocatior<LoginController>();
     _loginController.onUsernameChanged(_usernameController.text);
     _loginController.onPasswordChanged(_passwordController.text);
   }
@@ -105,7 +105,7 @@ class _LoginViewState extends State<LoginView> {
                   Text(
                     isLoading
                         ? 'Please wait...'
-                        : 'Demo credentials are prefilled for fakestoreapi.',
+                        : 'Demo credentials are prefilled for you.',
                   ),
                 ],
               ),

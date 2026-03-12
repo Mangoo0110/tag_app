@@ -1,6 +1,7 @@
 import 'package:app_pigeon/app_pigeon.dart';
 import 'package:async_handler/async_handler.dart';
 import 'package:tag_app/src/core/constants/api_endpoints.dart';
+import 'package:tag_app/src/feature/auth/data/models/auth_user_model.dart';
 import 'package:tag_app/src/feature/auth/data/models/login_request_model.dart';
 import 'package:tag_app/src/feature/auth/data/models/login_response_model.dart';
 import 'package:tag_app/src/feature/auth/domain/entities/login_entity.dart';
@@ -29,4 +30,9 @@ final class AuthRemoteDataSource {
     }
     return response;
   }
+
+  Future<AuthUserModel> getCurrentUser() async{
+    final response = await _authorizedPigeon.get(ApiEndpoints.currentUser);
+    return AuthUserModel.fromMap(response.data);
+  } 
 }
