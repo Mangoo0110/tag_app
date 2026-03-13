@@ -47,7 +47,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         final res = await serviceLocator<GetCategoriesUseCase>().call(
           const GetCategoriesParams(),
         );
-        debugPrint("category pagination response from usecase: ${res.runtimeType}");
         return res.toCategoryPaginationResponse(onDemandPage: onDemandPage);
       },
     );
@@ -56,11 +55,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   _decideProductTabSetup() {
-    debugPrint("State of category pagination: ${_categoryPagination.state.value}");
     if (_categoryPagination.state.value == PaginationLoadState.loaded) {
       _setTabController();
     } else if (_categoryPagination.state.value == PaginationLoadState.error) {
-      _error = "Failed to load categories. Please try reloading the page!";
       setState(() {});
     }
   }
@@ -132,7 +129,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     return ListenableBuilder(
       listenable: _categoryPagination,
       builder: (context, child) {
-        debugPrint("State of category pagination buider: ${_categoryPagination.state.value}");
         bool isLoading =
             _categoryPagination.state.value == PaginationLoadState.refreshing ||
             (_categoryPagination.state.value == PaginationLoadState.loading &&
