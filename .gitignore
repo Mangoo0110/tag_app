@@ -50,3 +50,5 @@ app.*.map.json
 /lib/src/feature/auth
 /lib/src/feature/post
 
+config.bat
+node_modules

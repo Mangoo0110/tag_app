@@ -77,7 +77,6 @@ class CategoryRepositoryImpl with ErrorHandler implements CategoryRepository  {
   }
 
   List<dynamic> _extractProductList(Response<dynamic> response) {
-    debugPrint(response.data.toString());
     return response.data['products'] as List<dynamic>;
   }
 }
