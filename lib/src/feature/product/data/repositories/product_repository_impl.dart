@@ -25,7 +25,6 @@ class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
     final remote = await asyncTryCatch<ProductPage>(
       tryFunc: () async {
         _debugger.dekhao('Fetching products with params:::: ${params.toMap().toString()}');
-        
         final page = await _remote.getProducts(params);
 
         return SuccessResponse<ProductPage>(
@@ -96,23 +95,6 @@ class ProductRepositoryImpl with ErrorHandler implements ProductRepository{
     }).toList();
   }
 
-  List<Product> _paginate({
-    required List<Product> items,
-    required int page,
-    required int limit,
-  }) {
-    debugPrint("paginating for page $page with limit $limit on items count ${items.length}");
-    final start = (page - 1) * limit;
-    if (start >= items.length || start < 0) {
-      return const <Product>[];
-    }
-    final end = min(start + limit, items.length);
-    if(end > items.length || end < 0) {
-      _debugger.dekhao('Pagination end index $end is greater than total items ${items.length}. Adjusting end index to ${items.length}.');
-      return const <Product>[];
-    }
-    return items.sublist(start, end);
-  }
 }
 
 double _minVariantPrice(List<ProductVariant> variants) {

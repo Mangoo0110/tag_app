@@ -1,5 +1,6 @@
 import 'package:app_pigeon/app_pigeon.dart';
 import 'package:async_handler/async_handler.dart';
+import 'package:flutter/widgets.dart';
 import 'package:tag_app/src/core/constants/api_endpoints.dart';
 import 'package:tag_app/src/feature/auth/data/models/auth_user_model.dart';
 import 'package:tag_app/src/feature/auth/data/models/login_request_model.dart';
@@ -32,7 +33,10 @@ final class AuthRemoteDataSource {
   }
 
   Future<AuthUserModel> getCurrentUser() async{
+    debugPrint("Getting current user");
     final response = await _authorizedPigeon.get(ApiEndpoints.currentUser);
-    return AuthUserModel.fromMap(response.data);
+    final user = AuthUserModel.fromMap(response.data);
+    debugPrint("Current user: $user");
+    return user;
   } 
 }
