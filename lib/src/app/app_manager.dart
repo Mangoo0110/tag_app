@@ -48,8 +48,8 @@ class AppManager {
   }
 
   void _onAuthChange(AuthStatus? newAuth) async {
-    debugPrint('Auth state changed: $newAuth');
-    if (newAuth != null) {
+    debugPrint('Auth state changed: ${newAuth.runtimeType}');
+    if (newAuth != null && newAuth is Authenticated) {
       // Authenticated user
       currentAuth.value = newAuth;
       _guestMode = false;
@@ -64,7 +64,7 @@ class AppManager {
   void enterGuestMode() {
     _guestMode = true;
     currentAuth.value = null;
-    navigatorKey.currentState?.pushNamedAndRemoveUntil(RouteNames.guest.path, (route) => false);
+    navigatorKey.currentState?.pushNamedAndRemoveUntil(RouteNames.login.path, (route) => false);
   }
 
   void _initializeGlobalDataProviders() {

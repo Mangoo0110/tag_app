@@ -14,21 +14,15 @@ final class ProductRemoteDataSource with ErrorHandler {
   final AppPigeon _appPigeon;
 
   Future<ProductPage> getProducts(ProductQueryParams params) async {
-    final skip = (params.page - 1) * params.limit;
     final response = await _appPigeon.get(
       ApiEndpoints.getProducts,
       queryParameters: params.toMap()
     );
-    final body = response.data;
     final List<ProductModel> products = [];
     final rawList = response.data['products'] as List<dynamic>;
-    int cnt = 1;
     for(final data in rawList) {
       try {
-        debugPrint('cnt: $cnt');
-        debugPrint(data.toString());
         products.add(ProductModel.fromMap(data));
-        cnt++;
       } catch (e) {
         debugPrint(e.toString());
       }

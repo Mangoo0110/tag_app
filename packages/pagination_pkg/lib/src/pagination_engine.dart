@@ -80,14 +80,14 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
     final res = await onDemandPageCall( 
         onDemandPage: onDemandPage,
       );
+
     if(res is PaginationError) {
-      debugPrint("Error fetching page: ${res.page} with message: ${(res as PaginationError).message}");
       setError(error: res as PaginationError<ItemUniqueKey, ItemData>);
       return null;
     } else if(res is PaginationPage<ItemUniqueKey, ItemData>) {
-      debugPrint("Fetched page: ${res.page} with items: ${res.items}");
       page = res;
     }
+
     _lastFetchTime = DateTime.now();
     return page;
   }
@@ -98,6 +98,7 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
         debugPrint("Already refreshing...");
         return;
       }
+      
       searchText.value = text;
       setRefresh();
     
@@ -109,7 +110,6 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
         ),
       );
 
-      debugPrint("Search result for text: $text is page: ${page?.page} with items count: ${page?.items.length}");
       if(page != null) {
         debugPrint("Adding items: ${page.items.length}");
         _mem.addNextPage(page.items);
@@ -222,7 +222,7 @@ class PaginationEngine<ItemUniqueKey, ItemData> extends ChangeNotifier{
   }
 
   Future<void> refresh() async{
-    debugPrint("Refreshing...");
+    debugPrint("Refreshing Pagination...");
     search(searchText.value);
   }
 
